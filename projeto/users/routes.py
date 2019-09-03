@@ -2,7 +2,8 @@ from flask import render_template, url_for, flash, redirect, request, Blueprint
 from flask_login import login_user, current_user, logout_user, login_required
 from projeto import db, bcrypt
 from projeto.models import User, Book
-from projeto.users.forms import RegistrationForm, LoginForm
+from projeto.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from projeto.users.utils import save_picture
 
 users = Blueprint('users', __name__)
 
@@ -22,5 +23,39 @@ def register():
 
 @users.route("/login", methods=["GET", "POST"])
 def login():
+	if current_user.is_authenticated:
+		return redirect(url_for('main.home'))
 	form = LoginForm()
-	return render_template('login.html', form=form)
+	if form.validate_on_submit():
+		user = User.query.filter_by(email=form.email.data).first()
+		if user and bcrypt.check_password_hash(user.password, form.password.data):
+			login_user(user, remember=form.remember.data)
+			next_page = request.args.get('next')
+			return redirect(next_page) if next_page else redirect(url_for('main.home'))
+		else:
+			flash('Login Unsuccessful. Please check email and password', 'danger')
+	return render_template('login.html', title='Login', form=form) # Passamos a instância da form para o nosso template
+
+@users.route("/logout")
+def logout():
+	logout_user()
+	return redirect(url_for('main.home'))
+
+@users.route("/account", methods=["GET", "POST"])
+@login_required
+def account():
+	form = UpdateAccountForm()
+	if form.validate_on_submit():
+		if form.picture.data:
+			picture_file = save_picture(form.picture.data)
+			current_user.image_file = picture_file
+		current_user.username = form.username.data
+		current_user.email = form.email.data
+		db.session.commit()
+		flash('your account has been updated', 'success')
+		return redirect(url_for('users.account'))
+	elif request.method == 'GET':
+		form.username.data = current_user.username
+		form.email.data = current_user.email
+	image_file = url_for('static', filename='profile/' + current_user.image_file)
+	return render_template('account.html', title='Account', image_file=image_file, form=form)
