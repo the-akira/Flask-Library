@@ -7,9 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-	{% block content %}{% endblock %}
+    <div class="container caixa-principal">
+        <div class="row">
+            <ul class="list-group  list-group-horizontal skull text-center mt-4">
+              <li class="list-group-item"><strong>Home</strong></li>
+              <li class="list-group-item"><strong>About</strong></li>
+              <li class="list-group-item"><strong>Cópias disponíveis</strong></li>
+              <li class="list-group-item"><strong>Autores</strong></li>
+            </ul>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
 	<!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

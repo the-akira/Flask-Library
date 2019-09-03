@@ -1,0 +1,119 @@
+body {
+	background-color: black;
+	color: #908d94;
+}
+
+.nav{
+	padding: 20px;
+	border: 1px solid white;
+	margin-top: 15px;
+	background-color: #222222; 
+}
+
+a{
+	color: white !important;
+}
+
+strong {
+	color: white;
+}
+
+b{
+	color: black;
+}
+
+.container{
+	padding: 20px;
+	margin-top: 20px;
+	background-color:#100109;
+	margin-bottom: 20px;
+}
+
+.caixa-principal{
+	border: 1px solid white;
+	box-shadow: 5px 5px 5px #222222;
+	border-radius: 14px;
+}
+
+.titulo{
+	text-shadow:2px 2px #222222, 0 0 4px black;
+	color:#908d94;
+	font-weight: bold;
+	font-style: oblique;
+}
+
+.list-group-item{
+	margin-bottom:4px;
+	background-color: #908d94;
+}
+
+.list-group-item:hover{
+	margin-bottom:4px;
+	background-color: black;
+	cursor: pointer;
+}
+
+hr{
+	background-color: white;
+}
+
+.btn-primary{
+	margin-top: 10px;
+	background-color: gray !important;
+	border: 1px solid white !important;
+}
+
+.page-current{
+	background-color:#222222 !important;
+}
+
+.livro{
+	color: white;
+}
+
+.skull{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+}
+
+.list-group-horizontal .list-group-item {
+	margin-bottom: 4px !important;
+}
+
+form{
+	padding: 20px;
+	border: 1px solid white;
+	background-color: #222222; 
+}
+
+input {
+	width: 100%;
+	padding: 6px 12px;
+	border: 1px solid black;
+	border-radius: 10px;
+	color: black;
+}
+
+input:focus{
+	background-color: gray;
+}
+
+textarea{
+	resize: none;
+	display: block;
+}
+
+.form-group > label:nth-child(6){
+	display: block;
+}
+
+#id_genre, #id_language, #id_author{
+	display: block;
+}
+
+.form-group > label:nth-child(14){
+	display: block;
+	margin-top: 5px;
+}

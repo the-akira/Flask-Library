@@ -1,5 +1,14 @@
 {% extends "layout.html" %}
 
 {% block content %}
-	<p>Hello World</p>
+<div class="container text-center">
+    <h1 class="text-center titulo">Biblioteca Secreta</h1>
+    <br>
+    <img src="{{ url_for('static', filename='img/skull.jpg') }}" class="rounded-circle skull img-thumbnail" style="width:250px;height:250px;">
+    <br>
+    <p class="text-center">"Seja muito bem vindo à <em>Grande Biblioteca Secreta</em>!"</p>
+    <h3>Conteúdo Dinâmico</h3>
+    <p>Nossa biblioteca conta atualmente com os seguintes contadores de registros:</p>
+    <br>
+<div> 
 {% endblock content %}
