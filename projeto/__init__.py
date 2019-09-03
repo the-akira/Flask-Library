@@ -19,7 +19,9 @@ def create_app(config_class=Config):
 	bcrypt.init_app(app)
 	login_manager.init_app(app)
 
+	from projeto.users.routes import users
 	from projeto.main.routes import main
 	app.register_blueprint(main)
+	app.register_blueprint(users)
 
 	return app
