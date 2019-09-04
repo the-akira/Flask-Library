@@ -62,4 +62,4 @@ def update_book(book_id):
 		form.author.data = book.author
 		form.summary.data = book.summary
 		form.image_book.data = book.image_book
-	return render_template('create_book.html', form=form)
+	return render_template('create_book.html', form=form, legend='Update Book')
