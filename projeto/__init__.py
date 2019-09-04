@@ -20,8 +20,10 @@ def create_app(config_class=Config):
 	login_manager.init_app(app)
 
 	from projeto.users.routes import users
+	from projeto.books.routes import books
 	from projeto.main.routes import main
-	app.register_blueprint(main)
 	app.register_blueprint(users)
-
+	app.register_blueprint(main)
+	app.register_blueprint(books)
+	
 	return app

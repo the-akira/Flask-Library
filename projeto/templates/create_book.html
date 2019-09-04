@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1 class="text-center titulo">New Book</h1>
+    <br>
+	<div class="content-section">
+	  <div class="media">	    
+	    <div class="media-body text-center">
+	      <h2 class="account-heading"><i class="fas fa-user"></i> {{ current_user.username }}</h2>
+	      <h4 class="text-secondary"><i class="fas fa-envelope-square"></i> {{ current_user.email }}</h4>
+	   </div>
+	</div>
+	<br>
+	<div class="content-section">
+		<form method="POST" action="" enctype="multipart/form-data">
+			{{ form.hidden_tag() }}
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">{{ legend }}</legend>
+				<div class="form-group">
+					{{ form.title.label(class="form-control-label") }}
+
+					<!-- Seção que faz a validação dos formulários -->
+					{% if form.title.errors %}
+						{{ form.title(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.title.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.title(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+				<div class="form-group">
+					{{ form.author.label(class="form-control-label") }}
+
+					<!-- Seção que faz a validação dos formulários -->
+					{% if form.author.errors %}
+						{{ form.author(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.author.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.author(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+				<div class="form-group">
+					{{ form.summary.label(class="form-control-label") }}
+
+					<!-- Seção que faz a validação dos formulários -->
+					{% if form.summary.errors %}
+						{{ form.summary(class="form-control form-control-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.summary.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.summary(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+				<br>
+				<div class="form-group">
+					<div class="custom-file">
+						{{ form.image_book(class="custom-file-input") }}
+						{{ form.image_book.label(class="custom-file-label") }}
+					</div>
+					{% if form.image_book.errors %}
+						{% for error in form.image_book.errors %}
+							<span class="text-danger">{{ error }}</span></br>
+						{% endfor %}
+					{% endif %}	
+				</div>
+				<div class="form-group">
+					{{ form.submit(class="btn btn-primary") }}
+				</div>
+			</fieldset>
+		</form>
+	</div>
+{% endblock content %}
+
+{% block script %}
+<script type="text/javascript">
+	$(".custom-file-input").on("change", function() {
+	  var fileName = $(this).val().split("\\").pop();
+	  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+	});
+</script>
+{% endblock script %}
