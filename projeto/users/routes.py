@@ -59,3 +59,10 @@ def account():
 		form.email.data = current_user.email
 	image_file = url_for('static', filename='profile/' + current_user.image_file)
 	return render_template('account.html', title='Account', image_file=image_file, form=form)
+
+@users.route("/user/<string:username>")
+def user_book(username):
+	page = request.args.get('page', 1, type=int)
+	user = User.query.filter_by(username=username).first_or_404()
+	books = Book.query.filter_by(user=user).order_by(Book.date_posted.desc()).paginate(page=page, per_page=5)
+	return render_template('user_books.html', books=books, user=user)

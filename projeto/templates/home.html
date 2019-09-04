@@ -22,7 +22,7 @@
 			<h4>Posted in: {{ book.date_posted.strftime('%Y-%m-%d') }}</h4><br>
 			<p>Summary: {{ book.summary }}</p><br>
 			<img src="{{ url_for('static', filename='book/' + book.image_book) }}"><br>
-			<p class="mb-2 mt-2">Post by: <a href=""><strong>{{ book.user.username }}</strong></a></p><br>
+			<p class="mb-2 mt-2">Post by: <a href="{{ url_for('users.user_book', username=book.user.username) }}"><strong>{{ book.user.username }}</strong></a></p><br>
 			<hr>
 		{% endfor %}
 	</div>
