@@ -25,8 +25,8 @@ b{
 .container{
 	padding: 20px;
 	margin-top: 20px;
-	/* background-color:#100109; */
-	background-color: #0d0b0c;
+	background-color:#100109;
+	/* background-color: #0d0b0c; */
 	margin-bottom: 20px;
 }
 
@@ -111,4 +111,17 @@ textarea{
 
 .table {
     color: #908d94 !important;
+}
+
+.modal-content{
+	background-color: #100109 !important;
+}
+
+.delete-form{
+	border: none !important;
+	box-shadow: none !important;
+}
+
+.close-modal{
+	color: white !important;
 }

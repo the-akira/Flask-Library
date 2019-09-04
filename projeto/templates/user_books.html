@@ -7,7 +7,7 @@
 	{% for book in books.items %}
 		  <div>
 		    <div>
-		    <h2><a class="article-title" href="">{{ book.title }}</a></h2>
+		    <h2><a class="article-title" href="{{ url_for('books.book', book_id=book.id) }}">{{ book.title }}</a></h2>
 		      <h4 class="mb-3">{{ book.author }}</h4>
 		      <img class="img-thumbnail article-img" src="{{ url_for('static', filename='book/' + book.image_book) }}">
 		      <br>
