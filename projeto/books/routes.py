@@ -22,3 +22,8 @@ def new_book():
 		flash('Your book has been added!', 'success')
 		return redirect(url_for('main.home'))
 	return render_template('create_book.html', title='New Book', form=form, legend='New Book')
+
+@books.route("/book/<int:book_id>")
+def book(book_id):
+	book = Book.query.get_or_404(book_id)
+	return render_template('book.html', book=book)

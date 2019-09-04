@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container text-center">
+    <h1 class="text-center titulo">Secret Library</h1>
+    <br>
+    <img src="{{ url_for('static', filename='img/skull.jpg') }}" class="rounded-circle skull img-thumbnail" style="width:250px;height:250px;">
+    <br>
+    <p class="text-center">"Seja muito bem vindo à <em>Grande Biblioteca Secreta</em>!"</p>
+    <h3>Conteúdo Dinâmico</h3>
+    <p>Nossa biblioteca conta atualmente com os seguintes contadores de registros:</p>
+    <br>
+<div> 
+	<hr>
+	<h1 class="text-center titulo">Hall of Books</h1>
+	<hr>
+	<div class="container text-center">
+		{{book.id}}
+		<h2>Title:<strong> <a href="">{{ book.title }}</a></strong></h2><br>
+		<h3>Author: <strong>{{ book.author }}</strong></h3><br>
+		<h4>Posted in: {{ book.date_posted.strftime('%Y-%m-%d') }}</h4><br>
+		<p><strong>Summary:</strong> {{ book.summary }}</p><br>
+		<img src="{{ url_for('static', filename='book/' + book.image_book) }}"><br>
+		<p class="mb-2 mt-2">Post by: <a href="{{ url_for('users.user_book', username=book.user.username) }}"><strong>{{ book.user.username }}</strong></a></p><br>
+		<hr>
+	</div>
+{% endblock content %}
