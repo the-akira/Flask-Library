@@ -22,8 +22,10 @@ def create_app(config_class=Config):
 	from projeto.users.routes import users
 	from projeto.books.routes import books
 	from projeto.main.routes import main
+	from projeto.errors.handlers import errors
 	app.register_blueprint(users)
 	app.register_blueprint(main)
 	app.register_blueprint(books)
+	app.register_blueprint(errors)
 	
 	return app
