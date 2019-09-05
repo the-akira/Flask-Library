@@ -26,9 +26,9 @@
 			<h2>Title:<strong> <a href="{{ url_for('books.book', book_id=book.id) }}">{{ book.title }}</a></strong></h2><br>
 			<h3>Author: <strong>{{ book.author }}</strong></h3><br>
 			<h5>Posted in: {{ book.date_posted.strftime('%Y-%m-%d') }}</h5><br>
-			<p><strong>Summary:</strong> {{ book.summary }}</p><br>
-			<img src="{{ url_for('static', filename='book/' + book.image_book) }}"><br>
-			<p class="mb-2 mt-2">Post by: <a href="{{ url_for('users.user_book', username=book.user.username) }}"><strong>{{ book.user.username }}</strong></a></p><br>
+			<p class="summary"><strong>Summary:</strong> {{ book.summary }}</p><br>
+			<img class="img-thumbnail" src="{{ url_for('static', filename='book/' + book.image_book) }}"><br>
+			<p class="mb-2 mt-3">Book posted by: <a href="{{ url_for('users.user_book', username=book.user.username) }}"><strong>{{ book.user.username }}</strong></a></p><br>
 			<hr>
 		{% endfor %}
 	</div>

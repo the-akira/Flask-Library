@@ -127,3 +127,7 @@ textarea{
 .close-modal{
 	color: white !important;
 }
+
+.summary{
+	text-align: justify;
+}
