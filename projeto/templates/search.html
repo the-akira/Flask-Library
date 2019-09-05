@@ -16,12 +16,13 @@
 	<h1 class="text-center titulo">Hall of Books</h1>
 	<hr>
 	<form method="GET" class="form-group" action="{{ url_for('main.search') }}">
-		<h2>Search for Books in our Database</h2>
-		<p>Search by: (<strong>Title</strong>, <strong>Author</strong> or <strong>Summary</strong>)</p>
+		<h2>Search Books in our Database</h2>
 		<input type="text" name="q" class="form-control" >
 		<input type="submit" class="btn btn-primary btn-sm" value="Search" >
 	</form>
 	<div class="container text-center">
+		<h2>Results for <strong>{{ query }}</strong></h2>
+		<br>
 		{% for book in books.items %}
 			<h2>Title:<strong> <a href="{{ url_for('books.book', book_id=book.id) }}">{{ book.title }}</a></strong></h2><br>
 			<h3>Author: <strong>{{ book.author }}</strong></h3><br>
@@ -32,15 +33,4 @@
 			<hr>
 		{% endfor %}
 	</div>
-	{% for page_num in books.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-		{% if page_num %}
-			{% if books.page == page_num %}
-				<a class="btn btn-primary mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
-			{% else %}
-				<a class="btn btn-primary mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
-			{% endif %}
-		{% else %}
-
-		{% endif %}
-	{% endfor %}
 {% endblock content %}

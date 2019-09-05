@@ -1,5 +1,6 @@
 body {
 	background-color: black;
+	background-image: url(/static/img/dark.png);
 	color: #908d94;
 }
 
@@ -107,6 +108,7 @@ input {
 textarea{
 	resize: none;
 	display: block;
+	height: 160px !important;
 }
 
 .table {

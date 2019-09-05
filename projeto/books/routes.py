@@ -57,7 +57,7 @@ def update_book(book_id):
 			flash('Your book has been updated', 'success')
 			return redirect(url_for('books.book', book_id=book.id))
 	elif request.method == 'GET':
-		# Preenche os formulários com os dados atuais do post
+		# Preenche os formulários com os dados atuais do livro
 		form.title.data = book.title
 		form.author.data = book.author
 		form.summary.data = book.summary
