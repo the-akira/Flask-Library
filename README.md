@@ -2,6 +2,15 @@
 
 A simple library prototype using Python-Flask
 
+## Features
+
+- Create Book
+- Update Book
+- Delete Book
+- Search Books
+- User Registration / Login
+- Account Info / Update
+
 ## Installation
 
 ### Clone the Repository
