@@ -2,31 +2,31 @@
 
 {% block content %}
 <div class="container text-center">
-	<h1 class="mb-3 titulo">Books by {{ user.username }}</h1>
-	<hr>
-	{% for book in books.items %}
-		  <div>
-		    <div>
-		    <h2><a class="article-title" href="{{ url_for('books.book', book_id=book.id) }}">{{ book.title }}</a></h2>
-		      <h4 class="mb-3">{{ book.author }}</h4>
-		      <img class="img-thumbnail article-img" src="{{ url_for('static', filename='book/' + book.image_book) }}">
-		      <br>
-		      <small class="text-muted">{{ book.date_posted.strftime('%Y-%m-%d') }}</small>
-		    </div>
-		    <p class="article-content">{{ book.summary }}</p>
-		  </div>
-		  <hr>
-	{% endfor %}
-	{% for page_num in books.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-		{% if page_num %}
-			{% if books.page == page_num %}
-				<a class="btn btn-primary mb-4" href="{{ url_for('users.user_book', username=user.username, page=page_num) }}">{{ page_num }}</a>
-			{% else %}
-				<a class="btn btn-primary mb-4" href="{{ url_for('users.user_book', username=user.username, page=page_num) }}">{{ page_num }}</a>
-			{% endif %}
-		{% else %}
+    <h1 class="mb-3 titulo">Books by {{ user.username }}</h1>
+    <hr>
+    {% for book in books.items %}
+        <div>
+            <div>
+                <h2><a class="article-title" href="{{ url_for('books.book', book_id=book.id) }}">{{ book.title }}</a></h2>
+                <h4 class="mb-3">{{ book.author }}</h4>
+                <img class="img-thumbnail article-img" src="{{ url_for('static', filename='book/' + book.image_book) }}">
+                <br>
+                <small class="text-muted">{{ book.date_posted.strftime('%Y-%m-%d') }}</small>
+            </div>
+            <p class="article-content">{{ book.summary }}</p>
+        </div>
+        <hr>
+    {% endfor %}
+    {% for page_num in books.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+            {% if books.page == page_num %}
+                <a class="btn btn-primary mb-4" href="{{ url_for('users.user_book', username=user.username, page=page_num) }}">{{ page_num }}</a>
+            {% else %}
+                <a class="btn btn-primary mb-4" href="{{ url_for('users.user_book', username=user.username, page=page_num) }}">{{ page_num }}</a>
+            {% endif %}
+        {% else %}
 
-		{% endif %}
-	{% endfor %}
+        {% endif %}
+    {% endfor %}
 </div>
 {% endblock content %}

@@ -12,40 +12,40 @@
     <br>
     <br>
 <div> 
-	<hr>
-	<h1 class="text-center titulo">{{ book.title }}</h1>
-	<hr>
-	{% if book.user == current_user %}
-	  	<div>
-	  	 	<a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('books.update_book', book_id=book.id) }}">Update</a>
-	  	 	<button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
-	  	</div>
-	{% endif %}	
-	<div class="container text-center">
-		<h2>Author: <strong>{{ book.author }}</strong></h2><br>
-		<h5>Posted in: {{ book.date_posted.strftime('%Y-%m-%d') }}</h5><br>
-		<p class="summary"><strong>Summary:</strong> {{ book.summary }}</p><br>
-		<img class="img-thumbnail" src="{{ url_for('static', filename='book/' + book.image_book) }}"><br>
-		<p class="mb-2 mt-2">Post by: <a href="{{ url_for('users.user_book', username=book.user.username) }}"><strong>{{ book.user.username }}</strong></a></p><br>
-		<hr>
-	</div>
-	<!-- Modal -->
-	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="deleteModalLabel">Would you like to delete the book <strong>{{ book.title }}</strong>?</h5>
-	        <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <form class="delete-form" action="{{ url_for('books.delete_book', book_id=book.id) }}" method="POST">
-	        	<input type="submit" class="btn btn-danger" value="Delete">
-	        </form>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+    <hr>
+    <h1 class="text-center titulo">{{ book.title }}</h1>
+    <hr>
+    {% if book.user == current_user %}
+        <div>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('books.update_book', book_id=book.id) }}">Update</a>
+            <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+        </div>
+    {% endif %}	
+    <div class="container text-center">
+        <h2>Author: <strong>{{ book.author }}</strong></h2><br>
+        <h5>Posted in: {{ book.date_posted.strftime('%Y-%m-%d') }}</h5><br>
+        <p class="summary"><strong>Summary:</strong> {{ book.summary }}</p><br>
+        <img class="img-thumbnail" src="{{ url_for('static', filename='book/' + book.image_book) }}"><br>
+        <p class="mb-2 mt-2">Post by: <a href="{{ url_for('users.user_book', username=book.user.username) }}"><strong>{{ book.user.username }}</strong></a></p><br>
+        <hr>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Would you like to delete the book <strong>{{ book.title }}</strong>?</h5>
+                    <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <form class="delete-form" action="{{ url_for('books.delete_book', book_id=book.id) }}" method="POST">
+                        <input type="submit" class="btn btn-danger" value="Delete">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

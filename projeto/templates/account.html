@@ -6,95 +6,95 @@
     <br>
     <img class="rounded-circle skull account-img mb-2 img-thumbnail" src="{{ image_file }}" style="width:250px;height:250px;">
     <br>
-	<div class="content-section">
-	  <div class="media">	    
-	    <div class="media-body text-center">
-	      <h2 class="account-heading"><i class="fas fa-user"></i> {{ current_user.username }}</h2>
-	      <h4 class="text-secondary"><i class="fas fa-envelope-square"></i> {{ current_user.email }}</h4>
-	      <p class="text-secondary"><i class="fas fa-file-image"></i> {{ current_user.image_file }}</p>
+    <div class="content-section">
+        <div class="media">	    
+            <div class="media-body text-center">
+                <h2 class="account-heading"><i class="fas fa-user"></i> {{ current_user.username }}</h2>
+                <h4 class="text-secondary"><i class="fas fa-envelope-square"></i> {{ current_user.email }}</h4>
+                <p class="text-secondary"><i class="fas fa-file-image"></i> {{ current_user.image_file }}</p>
 	      
-	      <table class="table table-bordered">
-	      	<thead>
-		      <tr>
-		        <th><h2><i class="fas fa-book"></i></h2></th>
-		        <th><h2><i class="fas fa-pencil-alt"></i></h2></th>
-		        <th><h2><i class="far fa-calendar-alt"></i></h2></th>
-		      </tr>
-   			</thead>
-   			<tbody>
-   			{% for book in current_user.Book %}
-   			<tr>
-				<td>{{ book.title }}</td>
-				<td>{{ book.author }}</td>
-				<td>{{ book.date_posted.strftime('%Y-%m-%d') }}</td>
-			</tr>
-		    {% endfor %}	
-   			</tbody>
-	      </table>
-	   </div>
-	</div>
-	<br>
-	<form method="POST" action="" enctype="multipart/form-data">
-		{{ form.hidden_tag() }}
-		<fieldset class="form-group">
-			<legend class="border-bottom mb-4">Update Account Info</legend>
-			<div class="form-group">
-				{{ form.username.label(class="form-control-label") }}
-
-				<!-- Seção que faz a validação dos formulários -->
-				{% if form.username.errors %}
-					{{ form.username(class="form-control form-control-lg is-invalid") }}
-					<div class="invalid-feedback">
-						{% for error in form.username.errors %}
-							<span>{{ error }}</span>
-						{% endfor %}
-					</div>
-				{% else %}
-					{{ form.username(class="form-control form-control-lg") }}
-				{% endif %}
-			</div>
-			<div class="form-group">
-				{{ form.email.label(class="form-control-label") }}
-
-				<!-- Seção que faz a validação dos formulários -->
-				{% if form.email.errors %}
-					{{ form.email(class="form-control form-control-lg is-invalid") }}
-					<div class="invalid-feedback">
-						{% for error in form.email.errors %}
-							<span>{{ error }}</span>
-						{% endfor %}
-					</div>
-				{% else %}
-					{{ form.email(class="form-control form-control-lg") }}
-				{% endif %}
-			</div>
-			<br>
-			<div class="form-group">
-				<div class="custom-file">
-					{{ form.picture(class="custom-file-input") }}
-					{{ form.picture.label(class="custom-file-label") }}
-				</div>
-				{% if form.picture.errors %}
-					{% for error in form.picture.errors %}
-						<span class="text-danger">{{ error }}</span></br>
-					{% endfor %}
-				{% endif %}	
-			</div>
-		</fieldset>
-		<div class="form-group">
-			{{ form.submit(class="btn btn-primary") }}
-		</div>
-	</form>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th><h2><i class="fas fa-book"></i></h2></th>
+                            <th><h2><i class="fas fa-pencil-alt"></i></h2></th>
+                            <th><h2><i class="far fa-calendar-alt"></i></h2></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for book in current_user.Book %}
+                        <tr>
+                            <td>{{ book.title }}</td>
+                            <td>{{ book.author }}</td>
+                            <td>{{ book.date_posted.strftime('%Y-%m-%d') }}</td>
+                        </tr>
+                        {% endfor %}	
+                   </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
     <br>
-</div>
-<div> 
+    <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Update Account Info</legend>
+            <div class="form-group">
+                {{ form.username.label(class="form-control-label") }}
+
+                <!-- Seção que faz a validação dos formulários -->
+                {% if form.username.errors %}
+                    {{ form.username(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.username.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.username(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.email.label(class="form-control-label") }}
+
+                <!-- Seção que faz a validação dos formulários -->
+                {% if form.email.errors %}
+                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.email(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="custom-file">
+                    {{ form.picture(class="custom-file-input") }}
+                    {{ form.picture.label(class="custom-file-label") }}
+                </div>
+                {% if form.picture.errors %}
+                    {% for error in form.picture.errors %}
+                        <span class="text-danger">{{ error }}</span></br>
+                    {% endfor %}
+                {% endif %}	
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+    <br>
+</div> 
 {% endblock content %}
 
 {% block script %}
 <script type="text/javascript">
-	$(".custom-file-input").on("change", function() {
-	  var fileName = $(this).val().split("\\").pop();
-	  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-	});
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
 </script>
 {% endblock script %}
