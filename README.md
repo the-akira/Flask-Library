@@ -1,6 +1,8 @@
 # Flask Library
 
-A simple library prototype using Python-Flask
+![img](https://raw.githubusercontent.com/the-akira/Flask-Library/master/projeto/static/img/Avatar.png)
+
+A simple library prototype using Python-Flask.
 
 ## Features
 
@@ -44,3 +46,5 @@ Run the Application
 ```
 python run.py
 ```
+
+Open your Web Browser and navigate to `http://127.0.0.1:5000/`.
