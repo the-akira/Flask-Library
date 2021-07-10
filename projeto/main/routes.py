@@ -18,7 +18,7 @@ def search():
     if not query:
         return redirect(url_for('main.home'))
     books = Book.query.filter(or_(
-        Book.title.contains(query), 
-        Book.author.contains(query),
+        Book.title.contains(query.title()), 
+        Book.author.contains(query.title()),
         Book.summary.contains(query))).paginate(page=page, per_page=5)
     return render_template('search.html', books=books, query=query)

@@ -130,3 +130,18 @@ textarea {
 .summary {
   text-align: justify;
 }
+
+.icons {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  text-align: center;
+}
+
+i {
+  margin-right: 14px;
+  color: #908d94;
+}
