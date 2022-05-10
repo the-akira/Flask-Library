@@ -3,7 +3,7 @@ from flask_login import login_user, current_user, logout_user, login_required
 from projeto import db, bcrypt
 from projeto.models import User, Book
 from projeto.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
-from projeto.users.utils import save_picture
+from projeto.tools.utils import save_user_picture
 
 users = Blueprint('users', __name__)
 
@@ -47,7 +47,7 @@ def account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
         if form.picture.data:
-            picture_file = save_picture(form.picture.data)
+            picture_file = save_user_picture(form.picture.data)
             current_user.image_file = picture_file
         current_user.username = form.username.data
         current_user.email = form.email.data

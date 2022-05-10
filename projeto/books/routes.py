@@ -4,7 +4,7 @@ from flask_login import current_user, login_required
 from projeto import db
 from projeto.models import Book
 from projeto.books.forms import BookForm
-from projeto.books.utils import save_book_picture
+from projeto.tools.utils import save_book_picture
 
 books = Blueprint('books', __name__)
 
