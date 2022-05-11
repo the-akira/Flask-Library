@@ -14,7 +14,7 @@ def new_book():
     form = BookForm()
     if form.validate_on_submit():
         if form.image_book.data:
-            picture_file = save_picture(form.image_book.data, 'static/book', 480, 300)
+            picture_file = save_picture(form.image_book.data, 'static/book', 300, 480)
             book = Book(title=form.title.data, author=form.author.data, summary=form.summary.data, image_book=picture_file, user=current_user)
             db.session.add(book)
             db.session.commit()
