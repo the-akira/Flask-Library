@@ -151,12 +151,13 @@ i {
 }
 
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 25px #353535;
+  box-shadow: inset 0 0 25px #908d94;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #908d94;
+  background: #100109;
   border-radius: 0.25rem;
+  border: 2px solid white;
 }
 
 ::-webkit-scrollbar-thumb:hover {
