@@ -4,7 +4,7 @@ from flask_login import current_user, login_required
 from projeto import db
 from projeto.models import Book
 from projeto.books.forms import BookForm
-from projeto.tools.utils import save_book_picture
+from projeto.utils.utils import save_picture
 
 books = Blueprint('books', __name__)
 
@@ -13,9 +13,8 @@ books = Blueprint('books', __name__)
 def new_book():
     form = BookForm()
     if form.validate_on_submit():
-        print(form.image_book.data)
         if form.image_book.data:
-            picture_file = save_book_picture(form.image_book.data)
+            picture_file = save_picture(form.image_book.data, 'static/book', 480, 300)
             book = Book(title=form.title.data, author=form.author.data, summary=form.summary.data, image_book=picture_file, user=current_user)
             db.session.add(book)
             db.session.commit()
