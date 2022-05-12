@@ -81,6 +81,7 @@
                 {% if session.update %}
                     <a href="{{ url_for('books.book', book_id=book_id) }}" class="btn btn-warning mt-0">Cancel</a>
                 {% else %}
+                    <a href="{{ url_for('main.home') }}" class="btn btn-warning mt-0">Cancel</a>
                 {% endif %}
             </fieldset>
         </form>
