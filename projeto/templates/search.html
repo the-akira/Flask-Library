@@ -23,7 +23,7 @@
         <h2>Results for <strong>{{ query }}</strong></h2>
         <br>
         {% for book in books.items %}
-            <h2>Title: <strong> <a href="{{ url_for('books.book', book_id=book.id) }}">{{ book.title }}</a></strong></h2><br>
+            <h2>Title: <strong><a href="{{ url_for('books.book', book_id=book.id) }}">{{ book.title }}</a></strong></h2><br>
             <h3>Author: <strong><a href="{{ url_for('books.author', author=book.author) }}">{{ book.author }}</strong></a></h3><br>
             <h5>Posted in: {{ book.date_posted.strftime('%Y-%m-%d') }}</h5><br>
             <p><strong>Summary:</strong> {{ book.summary }}</p><br>

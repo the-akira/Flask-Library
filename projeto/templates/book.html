@@ -22,7 +22,7 @@
         </div>
     {% endif %}	
     <div class="container text-center">
-        <h2>Author: <strong>{{ book.author }}</strong></h2><br>
+        <h2>Author: <strong><a href="{{ url_for('books.author', author=book.author) }}">{{ book.author }}</a></strong></h2><br>
         <h5>Posted in: {{ book.date_posted.strftime('%Y-%m-%d') }}</h5><br>
         <p class="summary"><strong>Summary:</strong> {{ book.summary }}</p><br>
         <img class="img-thumbnail" src="{{ url_for('static', filename='book/' + book.image_book) }}"><br>
