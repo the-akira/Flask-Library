@@ -32,6 +32,12 @@ def book(book_id):
     book = Book.query.get_or_404(book_id)
     return render_template('book.html', book=book)
 
+@books.route("/author/<string:author>")
+def author(author):
+    page = request.args.get('page', 1, type=int)
+    books = Book.query.filter(Book.author.contains(author)).paginate(page=page, per_page=5)
+    return render_template('author.html', books=books, author=author)
+
 @books.route("/book/<int:book_id>/delete", methods=["POST"])
 @login_required
 def delete_book(book_id):
