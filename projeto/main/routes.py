@@ -20,5 +20,5 @@ def search():
     books = Book.query.filter(or_(
         Book.title.contains(query.title()), 
         Book.author.contains(query.title()),
-        Book.summary.contains(query))).paginate(page=page, per_page=5)
+        Book.summary.contains(query))).paginate(page=page)
     return render_template('search.html', books=books, query=query)
