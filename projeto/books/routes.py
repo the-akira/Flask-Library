@@ -12,7 +12,6 @@ books = Blueprint('books', __name__)
 @login_required
 def new_book():
     form = BookForm()
-    print(dir(form))
     if form.validate_on_submit():
         if form.image_book.data:
             picture_file = save_picture(form.image_book.data, 'static/book', 300, 480)
