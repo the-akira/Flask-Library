@@ -7,5 +7,5 @@ class BookForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     author = StringField('Author', validators=[DataRequired()])
     summary = TextAreaField('Summary', validators=[DataRequired()])
-    image_book = FileField('Book Picture', validators=[DataRequired(),FileAllowed(['jpg','png'])])
+    image_book = FileField('Book Picture', validators=[FileAllowed(['jpg','png'])])
     submit = SubmitField('Submit')

@@ -1,5 +1,5 @@
 from flask import Blueprint
-from flask import render_template, url_for, flash, redirect, request, abort, Blueprint
+from flask import render_template, url_for, flash, redirect, request, abort, Blueprint, session
 from flask_login import current_user, login_required
 from projeto import db
 from projeto.models import Book
@@ -18,9 +18,14 @@ def new_book():
             book = Book(title=form.title.data, author=form.author.data, summary=form.summary.data, image_book=picture_file, user=current_user)
             db.session.add(book)
             db.session.commit()
+        else:
+            book = Book(title=form.title.data, author=form.author.data, summary=form.summary.data, user=current_user)
+            db.session.add(book)
+            db.session.commit()            
         flash('Your book has been added!', 'success')
         return redirect(url_for('main.home'))
-    return render_template('create_book.html', title='New Book', form=form, legend='New Book')
+    session.update = False
+    return render_template('create_book.html', title='New Book', form=form, legend='New Book', update=session.update)
 
 @books.route("/book/<int:book_id>")
 def book(book_id):
@@ -53,12 +58,18 @@ def update_book(book_id):
             book.summary = form.summary.data 
             book.image_book = picture_file
             db.session.commit()
+        else:
+            book.title = form.title.data
+            book.author = form.author.data
+            book.summary = form.summary.data 
+            db.session.commit()
         flash('Your book has been updated', 'success')
         return redirect(url_for('books.book', book_id=book.id))
     elif request.method == 'GET':
         # Preenche os formulários com os dados atuais do livro
+        session.update = True
         form.title.data = book.title
         form.author.data = book.author
         form.summary.data = book.summary
         form.image_book.data = book.image_book
-    return render_template('create_book.html', form=form, legend='Update Book')
+    return render_template('create_book.html', form=form, legend='Update Book', update=session.update, book_id=book_id)

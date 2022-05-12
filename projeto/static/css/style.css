@@ -63,6 +63,10 @@ hr {
   border: 1px solid white !important;
 }
 
+.btn-primary:hover {
+  opacity: 0.85;
+}
+
 .page-current {
   background-color:#222222 !important;
 }
@@ -139,6 +143,17 @@ textarea {
   margin-right: auto;
   width: 60%;
   text-align: center;
+}
+
+.btn-warning {
+  background-color: #cc5c3d !important;
+  width: 100% !important;
+  border: 1px solid white !important
+}
+
+.btn-warning:hover {
+  cursor: pointer;
+  opacity: 0.85;
 }
 
 i {
