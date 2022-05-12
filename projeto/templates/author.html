@@ -11,25 +11,25 @@
     <small>Desenvolvida com Python-Flask</small>
     <br>
     <br>
+    <hr>
+    <h1 class="text-center titulo">Books of <strong>{{ author }}</strong></h1>
+    <hr>
+    <form method="GET" class="form-group" action="{{ url_for('main.search') }}">
+        <h2 class="mb-3">Search Books in our Database</h2>
+        <input type="text" name="q" class="form-control" >
+        <input type="submit" class="btn btn-primary btn-sm" value="Search" >
+    </form>
+    <div class="container text-center">
+        <br>
+        {% for book in books.items %}
+            <h2>Title:<strong> <a href="{{ url_for('books.book', book_id=book.id) }}">{{ book.title }}</a></strong></h2><br>
+            <h3>Author: <strong><a href="{{ url_for('books.author', author=book.author) }}">{{ book.author }}</strong></a></h3><br>
+            <h5>Posted in: {{ book.date_posted.strftime('%Y-%m-%d') }}</h5><br>
+            <p><strong>Summary:</strong> {{ book.summary }}</p><br>
+            <img class="img-thumbnail" src="{{ url_for('static', filename='book/' + book.image_book) }}"><br>
+            <p class="mb-2 mt-2">Post by: <a href="{{ url_for('users.user_book', username=book.user.username) }}"><strong>{{ book.user.username }}</strong></a></p><br>
+            <hr>
+        {% endfor %}
+    </div>
 </div> 
-<hr>
-<h1 class="text-center titulo">Books of <strong>{{ author }}</strong></h1>
-<hr>
-<form method="GET" class="form-group" action="{{ url_for('main.search') }}">
-    <h2>Search Books in our Database</h2>
-    <input type="text" name="q" class="form-control" >
-    <input type="submit" class="btn btn-primary btn-sm" value="Search" >
-</form>
-<div class="container text-center">
-    <br>
-    {% for book in books.items %}
-        <h2>Title:<strong> <a href="{{ url_for('books.book', book_id=book.id) }}">{{ book.title }}</a></strong></h2><br>
-        <h3>Author: <strong><a href="{{ url_for('books.author', author=book.author) }}">{{ book.author }}</strong></a></h3><br>
-        <h5>Posted in: {{ book.date_posted.strftime('%Y-%m-%d') }}</h5><br>
-        <p><strong>Summary:</strong> {{ book.summary }}</p><br>
-        <img class="img-thumbnail" src="{{ url_for('static', filename='book/' + book.image_book) }}"><br>
-        <p class="mb-2 mt-2">Post by: <a href="{{ url_for('users.user_book', username=book.user.username) }}"><strong>{{ book.user.username }}</strong></a></p><br>
-        <hr>
-    {% endfor %}
-</div>
 {% endblock content %}
