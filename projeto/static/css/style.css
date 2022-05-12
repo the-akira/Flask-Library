@@ -135,6 +135,10 @@ textarea {
   text-align: justify;
 }
 
+.table-icon {
+  margin-bottom: 0;
+}
+
 .icons {
   margin-top: 12px;
   margin-bottom: 12px;
@@ -177,4 +181,34 @@ i {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #908d94;
+}
+
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border: 1px solid #908d94;
+  opacity: 0.8;
+  box-shadow: 5px 6px 6px #222222;
+  border-radius: 10px;
+}
+
+.genres > h2 {
+  text-align: center;
+}
+
+.image-genre {
+  border: 1px solid #dee2e6; 
+  margin: 15px 15px 15px 15px;
+  border-radius: 10px;
+  width: 165px;
+  height: 165px;
+}
+
+.image-genre:hover {
+  border: 1px solid #dee2e6; 
+  opacity: 0.8;
+  cursor: pointer;
 }

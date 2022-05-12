@@ -48,6 +48,17 @@
                         {{ form.author(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
+                <div class="form-group">
+                    <div class="custom-file">
+                        {{ form.genre(class="custom-file-input") }}
+                        {{ form.genre.label(class="custom-file-label") }}
+                    </div>
+                    {% if form.genre.errors %}
+                        {% for error in form.genre.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %} 
+                </div>
                 <div class="form-group mb-0">
                     {{ form.summary.label(class="form-control-label") }}
 

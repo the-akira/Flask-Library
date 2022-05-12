@@ -16,9 +16,10 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th><h2><i class="fas fa-book"></i></h2></th>
-                            <th><h2><i class="fas fa-pencil-alt"></i></h2></th>
-                            <th><h2><i class="far fa-calendar-alt"></i></h2></th>
+                            <th><h2 class="table-icon"><i class="fas fa-book"></i></h2></th>
+                            <th><h2 class="table-icon"><i class="fas fa-pencil-alt"></i></h2></th>
+                            <th><h2 class="table-icon"><i class="fas fa-hamsa"></i></h2></th>
+                            <th><h2 class="table-icon"><i class="far fa-calendar-alt"></i></h2></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -26,6 +27,7 @@
                         <tr>
                             <td>{{ book.title }}</td>
                             <td>{{ book.author }}</td>
+                            <td>{{ book.genre }}</td>
                             <td>{{ book.date_posted.strftime('%Y-%m-%d') }}</td>
                         </tr>
                         {% endfor %}	

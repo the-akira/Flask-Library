@@ -12,14 +12,15 @@ books = Blueprint('books', __name__)
 @login_required
 def new_book():
     form = BookForm()
+    print(dir(form))
     if form.validate_on_submit():
         if form.image_book.data:
             picture_file = save_picture(form.image_book.data, 'static/book', 300, 480)
-            book = Book(title=form.title.data, author=form.author.data, summary=form.summary.data, image_book=picture_file, user=current_user)
+            book = Book(title=form.title.data, author=form.author.data, genre=form.genre.data, summary=form.summary.data, image_book=picture_file, user=current_user)
             db.session.add(book)
             db.session.commit()
         else:
-            book = Book(title=form.title.data, author=form.author.data, summary=form.summary.data, user=current_user)
+            book = Book(title=form.title.data, author=form.author.data, genre=form.genre.data, summary=form.summary.data, user=current_user)
             db.session.add(book)
             db.session.commit()            
         flash('Your book has been added!', 'success')
@@ -37,6 +38,12 @@ def author(author):
     page = request.args.get('page', 1, type=int)
     books = Book.query.filter(Book.author.contains(author.strip())).paginate(page=page)
     return render_template('author.html', books=books, author=author)
+
+@books.route("/genre/<string:genre>")
+def genre(genre):
+    page = request.args.get('page', 1, type=int)
+    books = Book.query.filter(Book.genre.contains(genre)).paginate(page=page)
+    return render_template('genre.html', books=books, genre=genre)
 
 @books.route("/book/<int:book_id>/delete", methods=["POST"])
 @login_required
@@ -61,12 +68,14 @@ def update_book(book_id):
             picture_file = save_book_picture(form.image_book.data)
             book.title = form.title.data
             book.author = form.author.data
+            book.genre = form.genre.data
             book.summary = form.summary.data 
             book.image_book = picture_file
             db.session.commit()
         else:
             book.title = form.title.data
             book.author = form.author.data
+            book.genre = form.genre.data
             book.summary = form.summary.data 
             db.session.commit()
         flash('Your book has been updated', 'success')
@@ -76,6 +85,7 @@ def update_book(book_id):
         session.update = True
         form.title.data = book.title
         form.author.data = book.author
+        form.genre.data = book.genre
         form.summary.data = book.summary
         form.image_book.data = book.image_book
     return render_template('create_book.html', form=form, legend='Update Book', update=session.update, book_id=book_id)
