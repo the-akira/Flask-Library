@@ -15,17 +15,36 @@ def new_book():
     if form.validate_on_submit():
         if form.image_book.data:
             picture_file = save_picture(form.image_book.data, 'static/book', 300, 480)
-            book = Book(title=form.title.data.strip(), author=form.author.data.strip(), genre=form.genre.data, summary=form.summary.data, image_book=picture_file, user=current_user)
+            book = Book(
+                title=form.title.data.strip(), 
+                author=form.author.data.strip(), 
+                genre=form.genre.data, 
+                summary=form.summary.data, 
+                image_book=picture_file, 
+                user=current_user
+            )
             db.session.add(book)
             db.session.commit()
         else:
-            book = Book(title=form.title.data.strip(), author=form.author.data.strip(), genre=form.genre.data, summary=form.summary.data, user=current_user)
+            book = Book(
+                title=form.title.data.strip(), 
+                author=form.author.data.strip(), 
+                genre=form.genre.data, 
+                summary=form.summary.data, 
+                user=current_user
+            )
             db.session.add(book)
             db.session.commit()            
         flash('Your book has been added!', 'success')
         return redirect(url_for('main.home'))
     session.update = False
-    return render_template('create_book.html', title='New Book', form=form, legend='New Book', update=session.update)
+    return render_template(
+        'create_book.html', 
+        title='New Book', 
+        form=form, 
+        legend='New Book', 
+        update=session.update
+    )
 
 @books.route("/book/<int:book_id>")
 def book(book_id):
@@ -80,11 +99,16 @@ def update_book(book_id):
         flash('Your book has been updated', 'success')
         return redirect(url_for('books.book', book_id=book.id))
     elif request.method == 'GET':
-        # Preenche os formulários com os dados atuais do livro
         session.update = True
         form.title.data = book.title
         form.author.data = book.author
         form.genre.data = book.genre
         form.summary.data = book.summary
         form.image_book.data = book.image_book
-    return render_template('create_book.html', form=form, legend='Update Book', update=session.update, book_id=book_id)
+    return render_template(
+        'create_book.html', 
+        form=form, 
+        legend='Update Book', 
+        update=session.update, 
+        book_id=book_id
+    )

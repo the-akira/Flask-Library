@@ -20,7 +20,7 @@ def register():
         db.session.commit()
         flash(f'Your account has been created! You are now able to log in', 'success')
         return redirect(url_for('users.login'))
-    return render_template('register.html', title='Register', form=form) # Passamos a instância da form para o nosso template
+    return render_template('register.html', title='Register', form=form) # Passamos a instância do form para o nosso template
 
 @users.route("/login", methods=["GET", "POST"])
 def login():
@@ -36,7 +36,7 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('main.home'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
-    return render_template('login.html', title='Login', form=form) # Passamos a instância da form para o nosso template
+    return render_template('login.html', title='Login', form=form) # Passamos a instância do form para o nosso template
 
 @users.route("/logout")
 def logout():
@@ -62,7 +62,14 @@ def account():
     image_file = url_for('static', filename='profile/' + current_user.image_file)
     books_author = dict(Counter(sorted([book.author for book in current_user.Book])))
     books_genre = dict(Counter(sorted([book.genre for book in current_user.Book])))
-    return render_template('account.html', title='Account', image_file=image_file, form=form, books_author=books_author, books_genre=books_genre)
+    return render_template(
+        'account.html', 
+        title='Account', 
+        image_file=image_file, 
+        form=form, 
+        books_author=books_author, 
+        books_genre=books_genre
+    )
 
 @users.route("/user/<string:username>")
 def user_book(username):
