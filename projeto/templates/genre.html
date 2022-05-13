@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="container text-center">
+<div class="container text-center mb-0 p-0">
     <h1 class="text-center titulo">Secret Library</h1>
     <br>
-    <img src="{{ url_for('static', filename='img/skull.jpg') }}" class="rounded-circle skull img-thumbnail" style="width:250px;height:250px;">
+    <img title="Obra de Gerhard Altzenbach" src="{{ url_for('static', filename='img/skull.jpg') }}" class="rounded-circle skull img-thumbnail">
     <br>
     <p class="text-center">"Seja muito bem vindo à <em>Grande Biblioteca Secreta</em>!"</p>
     <h3>Conteúdo Dinâmico</h3>
@@ -12,24 +12,23 @@
     <br>
     <br>
     <hr>
-    <h1 class="text-center titulo"><strong>{{ genre }} books</strong></h1>
+    <h1 class="text-center titulo"><strong>{{ genre }}</strong> books</h1>
     <hr>
     <form method="GET" class="form-group" action="{{ url_for('main.search') }}">
-        <h2>Search Books in our Database</h2>
+        <h2>Search for Books</h2>
         <p>Search by: (<strong>Title</strong>, <strong>Author</strong>, <strong>Genre</strong> or <strong>Summary</strong>)</p>
         <input type="text" name="q" class="form-control" >
         <input type="submit" class="btn btn-primary btn-sm" value="Search" >
     </form>
     <div class="container text-center">
-        <br>
         {% for book in books.items %}
-            <h2>Title:<strong> <a href="{{ url_for('books.book', book_id=book.id) }}">{{ book.title }}</a></strong></h2><br>
-            <h4>Genre: <strong><a href="{{ url_for('books.genre', genre=book.genre) }}">{{ book.genre }}</a></strong></h4><br>
+            <h2 class="movie-title">Title:<strong> <a href="{{ url_for('books.book', book_id=book.id) }}">{{ book.title }}</a></strong></h2><br>
             <h3>Author: <strong><a href="{{ url_for('books.author', author=book.author) }}">{{ book.author }}</strong></a></h3><br>
-            <h5>Posted in: {{ book.date_posted.strftime('%Y-%m-%d') }}</h5><br>
+            <h4>Genre: <strong><a href="{{ url_for('books.genre', genre=book.genre) }}">{{ book.genre }}</a></strong></h4><br>
+            <h5><strong>Posted in:</strong> {{ book.date_posted.strftime('%Y-%m-%d') }}</h5><br>
             <p><strong>Summary:</strong> {{ book.summary }}</p><br>
             <img class="img-thumbnail" src="{{ url_for('static', filename='book/' + book.image_book) }}"><br>
-            <p class="mb-2 mt-2">Post by: <a href="{{ url_for('users.user_book', username=book.user.username) }}"><strong>{{ book.user.username }}</strong></a></p><br>
+            <p class="mb-2 mt-3">Post by: <a href="{{ url_for('users.user_book', username=book.user.username) }}"><strong>{{ book.user.username }}</strong></a></p><br>
             <hr>
         {% endfor %}
     </div>

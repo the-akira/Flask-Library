@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="container text-center">
+<div class="container text-center mb-0">
     <h1 class="text-center titulo">Secret Library</h1>
     <br>
-    <img src="{{ url_for('static', filename='img/skull.jpg') }}" class="rounded-circle skull img-thumbnail" style="width:250px;height:250px;">
+    <img title="Obra de Gerhard Altzenbach" src="{{ url_for('static', filename='img/skull.jpg') }}" class="rounded-circle skull img-thumbnail">
     <br>
     <p class="text-center">"Seja muito bem vindo à <em>Grande Biblioteca Secreta</em>!"</p>
     <h3>Conteúdo Dinâmico</h3>
@@ -15,30 +15,30 @@
     <h1 class="text-center titulo">Hall of Books</h1>
     <hr>
     <form method="GET" class="form-group" action="{{ url_for('main.search') }}">
-        <h2>Search for Books in our Database</h2>
+        <h2>Search for Books</h2>
         <p>Search by: (<strong>Title</strong>, <strong>Author</strong>, <strong>Genre</strong> or <strong>Summary</strong>)</p>
         <input type="text" name="q" class="form-control" >
         <input type="submit" class="btn btn-primary btn-sm" value="Search" >
     </form>
-    <h1 class="text-center titulo">Select Your Favorite Genre</h1>
+    <h1 class="text-center titulo mb-3">Books by Genre</h1>
     <div class="genres">      
-        <a class="link-genre" href="{{ url_for('books.genre', genre='Secret Societies') }}"><img class="image-genre" title="Secret Societies" src="{{ url_for('static', filename='genre/SecretSocieties.png') }}"><a>
-        <a class="link-genre" href="{{ url_for('books.genre', genre='Philosophy') }}"><img class="image-genre" title="Philosophy" src="{{ url_for('static', filename='genre/Philosophy.png') }}"><a>
-        <a class="link-genre" href="{{ url_for('books.genre', genre='Spirituality') }}"><img class="image-genre" title="Spirituality" src="{{ url_for('static', filename='genre/Spirituality.png') }}"><a>
-        <a class="link-genre" href="{{ url_for('books.genre', genre='Science Fiction') }}"><img class="image-genre" title="Science Fiction" src="{{ url_for('static', filename='genre/ScienceFiction.png') }}"><a>
-        <a class="link-genre" href="{{ url_for('books.genre', genre='Folk Tales') }}"><img class="image-genre" title="Folk Tales" src="{{ url_for('static', filename='genre/FolkTales.png') }}"><a>
-        <a class="link-genre" href="{{ url_for('books.genre', genre='Psychology') }}"><img class="image-genre" title="Psychology" src="{{ url_for('static', filename='genre/Psychology.png') }}"><a>
-        <a class="link-genre" href="{{ url_for('books.genre', genre='Dystopian') }}"><img class="image-genre" title="Dystopian" src="{{ url_for('static', filename='genre/Dystopian.png') }}"><a>
-        <a class="link-genre" href="{{ url_for('books.genre', genre='Anime') }}"><img class="image-genre" title="Anime" src="{{ url_for('static', filename='genre/Anime.png') }}"><a>
-        <a class="link-genre" href="{{ url_for('books.genre', genre='Fantasy') }}"><img class="image-genre" title="Fantasy" src="{{ url_for('static', filename='genre/Fantasy.png') }}"><a>
-        <a class="link-genre" href="{{ url_for('books.genre', genre='Horror') }}"><img class="image-genre" title="Horror" src="{{ url_for('static', filename='genre/Horror.png') }}"><a>
+        <a href="{{ url_for('books.genre', genre='Secret Societies') }}"><img class="image-genre" title="Secret Societies" src="{{ url_for('static', filename='genre/SecretSocieties.png') }}"></a>
+        <a href="{{ url_for('books.genre', genre='Philosophy') }}"><img class="image-genre" title="Philosophy" src="{{ url_for('static', filename='genre/Philosophy.png') }}"></a>
+        <a href="{{ url_for('books.genre', genre='Spirituality') }}"><img class="image-genre" title="Spirituality" src="{{ url_for('static', filename='genre/Spirituality.png') }}"></a>
+        <a href="{{ url_for('books.genre', genre='Science Fiction') }}"><img class="image-genre" title="Science Fiction" src="{{ url_for('static', filename='genre/ScienceFiction.png') }}"></a>
+        <a href="{{ url_for('books.genre', genre='Folk Tales') }}"><img class="image-genre" title="Folk Tales" src="{{ url_for('static', filename='genre/FolkTales.png') }}"></a>
+        <a href="{{ url_for('books.genre', genre='Psychology') }}"><img class="image-genre" title="Psychology" src="{{ url_for('static', filename='genre/Psychology.png') }}"></a>
+        <a href="{{ url_for('books.genre', genre='Dystopian') }}"><img class="image-genre" title="Dystopian" src="{{ url_for('static', filename='genre/Dystopian.png') }}"></a>
+        <a href="{{ url_for('books.genre', genre='Anime') }}"><img class="image-genre" title="Anime" src="{{ url_for('static', filename='genre/Anime.png') }}"></a>
+        <a href="{{ url_for('books.genre', genre='Fantasy') }}"><img class="image-genre" title="Fantasy" src="{{ url_for('static', filename='genre/Fantasy.png') }}"></a>
+        <a href="{{ url_for('books.genre', genre='Horror') }}"><img class="image-genre" title="Horror" src="{{ url_for('static', filename='genre/Horror.png') }}"></a>
     </div>
-    <div class="container text-center">
+    <div class="container text-center mb-0">
         {% for book in books.items %}
-            <h2>Title: <strong><a href="{{ url_for('books.book', book_id=book.id) }}">{{ book.title }}</a></strong></h2><br>
+            <h2 class="movie-title">Title: <strong><a href="{{ url_for('books.book', book_id=book.id) }}">{{ book.title }}</a></strong></h2><br>
             <h3>Author: <strong><a href="{{ url_for('books.author', author=book.author) }}">{{ book.author }}</strong></a></h3><br>
             <h4>Genre: <strong><a href="{{ url_for('books.genre', genre=book.genre) }}">{{ book.genre }}</a></strong></h4><br>
-            <h5>Posted in: {{ book.date_posted.strftime('%Y-%m-%d') }}</h5><br>
+            <h5><strong>Posted in:</strong> {{ book.date_posted.strftime('%Y-%m-%d') }}</h5><br>
             <p class="summary"><strong>Summary:</strong> {{ book.summary }}</p><br>
             <img class="img-thumbnail" src="{{ url_for('static', filename='book/' + book.image_book) }}"><br>
             <p class="mb-2 mt-3">Book posted by: <a href="{{ url_for('users.user_book', username=book.user.username) }}"><strong>{{ book.user.username }}</strong></a></p><br>
@@ -48,9 +48,9 @@
     {% for page_num in books.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
         {% if page_num %}
             {% if books.page == page_num %}
-                <a class="btn btn-primary mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+                <a class="btn btn-primary mt-0" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
             {% else %}
-                <a class="btn btn-primary mb-4" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
+                <a class="btn btn-primary mt-0" href="{{ url_for('main.home', page=page_num) }}">{{ page_num }}</a>
             {% endif %}
         {% else %}
 

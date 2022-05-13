@@ -15,11 +15,11 @@ def new_book():
     if form.validate_on_submit():
         if form.image_book.data:
             picture_file = save_picture(form.image_book.data, 'static/book', 300, 480)
-            book = Book(title=form.title.data, author=form.author.data, genre=form.genre.data, summary=form.summary.data, image_book=picture_file, user=current_user)
+            book = Book(title=form.title.data.strip(), author=form.author.data.strip(), genre=form.genre.data, summary=form.summary.data, image_book=picture_file, user=current_user)
             db.session.add(book)
             db.session.commit()
         else:
-            book = Book(title=form.title.data, author=form.author.data, genre=form.genre.data, summary=form.summary.data, user=current_user)
+            book = Book(title=form.title.data.strip(), author=form.author.data.strip(), genre=form.genre.data, summary=form.summary.data, user=current_user)
             db.session.add(book)
             db.session.commit()            
         flash('Your book has been added!', 'success')
@@ -65,15 +65,15 @@ def update_book(book_id):
     if form.validate_on_submit():
         if form.image_book.data:
             picture_file = save_book_picture(form.image_book.data)
-            book.title = form.title.data
-            book.author = form.author.data
+            book.title = form.title.data.strip()
+            book.author = form.author.data.strip()
             book.genre = form.genre.data
             book.summary = form.summary.data 
             book.image_book = picture_file
             db.session.commit()
         else:
-            book.title = form.title.data
-            book.author = form.author.data
+            book.title = form.title.data.strip()
+            book.author = form.author.data.strip()
             book.genre = form.genre.data
             book.summary = form.summary.data 
             db.session.commit()

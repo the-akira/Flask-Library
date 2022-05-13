@@ -4,33 +4,66 @@
 <div class="container">
     <h1 class="text-center titulo">Account Information</h1>
     <br>
-    <img class="rounded-circle skull account-img mb-2 img-thumbnail" src="{{ image_file }}" style="width:250px;height:250px;">
+    <img class="rounded-circle account-img mb-2 img-thumbnail" src="{{ image_file }}">
     <br>
     <div class="content-section">
         <div class="media">	    
             <div class="media-body text-center">
                 <h2 class="account-heading"><i class="fas fa-user"></i> {{ current_user.username }}</h2>
                 <h4 class="text-secondary"><i class="fas fa-envelope-square"></i> {{ current_user.email }}</h4>
-                <p class="text-secondary"><i class="fas fa-file-image"></i> {{ current_user.image_file }}</p>
-	      
+                <br>	      
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th><h2 class="table-icon"><i class="fas fa-book"></i></h2></th>
-                            <th><h2 class="table-icon"><i class="fas fa-pencil-alt"></i></h2></th>
-                            <th><h2 class="table-icon"><i class="fas fa-hamsa"></i></h2></th>
-                            <th><h2 class="table-icon"><i class="far fa-calendar-alt"></i></h2></th>
+                            <th class="table-author"><h2 class="table-icon"><i class="fas fa-pencil-alt"></i></h2></th>
+                            <th class="table-genre"><h2 class="table-icon"><i class="fas fa-hamsa"></i></h2></th>
+                            <th class="table-date"><h2 class="table-icon"><i class="far fa-calendar-alt"></i></h2></th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for book in current_user.Book %}
                         <tr>
-                            <td>{{ book.title }}</td>
-                            <td>{{ book.author }}</td>
-                            <td>{{ book.genre }}</td>
-                            <td>{{ book.date_posted.strftime('%Y-%m-%d') }}</td>
+                            <td><a href="{{ url_for('books.book', book_id=book.id) }}">{{ book.title }}</a></td>
+                            <td class="table-author"><a href="{{ url_for('books.author', author=book.author) }}">{{ book.author }}</a></td>
+                            <td class="table-genre"><a href="{{ url_for('books.genre', genre=book.genre) }}">{{ book.genre }}</a></td>
+                            <td class="table-date">{{ book.date_posted.strftime('%Y-%m-%d') }}</td>
                         </tr>
                         {% endfor %}	
+                   </tbody>
+                </table>
+                <br>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th><h2 class="table-icon"><i class="fas fa-pencil-alt"></i></h2></th>
+                            <th><h2 class="table-icon"><i class="fas fa-infinity"></i></h2></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for author, number in books_author.items() %}
+                        <tr>
+                            <td><strong>{{ author }}</strong></td>
+                            <td><strong>{{ number }}</strong></td>
+                        </tr>
+                        {% endfor %}    
+                   </tbody>
+                </table>
+                <br>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th><h2 class="table-icon"><i class="fas fa-hamsa"></i></h2></th>
+                            <th><h2 class="table-icon"><i class="fas fa-infinity"></i></h2></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for genre, number in books_genre.items() %}
+                        <tr>
+                            <td><strong>{{ genre }}</strong></td>
+                            <td><strong>{{ number }}</strong></td>
+                        </tr>
+                        {% endfor %}    
                    </tbody>
                 </table>
             </div>
@@ -83,12 +116,11 @@
                     {% endfor %}
                 {% endif %}	
             </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
         </fieldset>
-        <div class="form-group">
-            {{ form.submit(class="btn btn-primary") }}
-        </div>
     </form>
-    <br>
 </div> 
 {% endblock content %}
 

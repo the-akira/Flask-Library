@@ -21,5 +21,5 @@ class BookForm(FlaskForm):
     author = StringField('Author', validators=[DataRequired()])
     genre = SelectField('Genre', choices=GENRES, validators=[Required()])
     summary = TextAreaField('Summary', validators=[DataRequired()])
-    image_book = FileField('Book Picture', validators=[FileAllowed(['jpg','png'])])
+    image_book = FileField('Picture', validators=[FileAllowed(['jpg','png'])])
     submit = SubmitField('Submit')

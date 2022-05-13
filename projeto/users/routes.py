@@ -4,6 +4,7 @@ from projeto import db, bcrypt
 from projeto.models import User, Book
 from projeto.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from projeto.utils.utils import save_picture
+from collections import Counter, OrderedDict
 
 users = Blueprint('users', __name__)
 
@@ -31,6 +32,7 @@ def login():
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
+            flash('Login Successful!', 'success')
             return redirect(next_page) if next_page else redirect(url_for('main.home'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
@@ -58,7 +60,9 @@ def account():
         form.username.data = current_user.username
         form.email.data = current_user.email
     image_file = url_for('static', filename='profile/' + current_user.image_file)
-    return render_template('account.html', title='Account', image_file=image_file, form=form)
+    books_author = dict(Counter(sorted([book.author for book in current_user.Book])))
+    books_genre = dict(Counter(sorted([book.genre for book in current_user.Book])))
+    return render_template('account.html', title='Account', image_file=image_file, form=form, books_author=books_author, books_genre=books_genre)
 
 @users.route("/user/<string:username>")
 def user_book(username):

@@ -79,7 +79,19 @@ hr {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 60%;
+  margin-bottom: 8px;
+  width: 500px;
+  height: auto;
+  opacity: 0.7 !important;
+  border-radius: 10px !important;
+}
+
+.account-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 250px;
+  height: 250px;
   opacity: 0.7 !important;
 }
 
@@ -131,10 +143,6 @@ textarea {
   color: white !important;
 }
 
-.summary {
-  text-align: justify;
-}
-
 .table-icon {
   margin-bottom: 0;
 }
@@ -183,6 +191,10 @@ i {
   background: #908d94;
 }
 
+.date {
+  font-size: 1.1rem;
+}
+
 .genres {
   display: flex;
   flex-wrap: wrap;
@@ -193,6 +205,7 @@ i {
   opacity: 0.8;
   box-shadow: 5px 6px 6px #222222;
   border-radius: 10px;
+  background-image: url(/static/img/dark.png);
 }
 
 .genres > h2 {
@@ -211,4 +224,105 @@ i {
   border: 1px solid #dee2e6; 
   opacity: 0.8;
   cursor: pointer;
+}
+
+.fa-user {
+  margin-right: 0;
+}
+
+.fa-envelope-square {
+  margin-right: 0;
+}
+
+.table {
+  background-image: url(/static/img/dark.png);
+}
+
+tr:hover {
+  background-color: black;
+}
+
+option:hover { 
+    background: #000 !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .skull {
+    width: 80%;
+  }
+  .movie-title {
+    font-size: 1.6rem;
+  }
+}
+
+@media only screen and (max-width: 534px) {
+  .image-genre {
+    width: 130px;
+    height: 130px;
+  }
+  .table-date {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 463px) {
+  .image-genre {
+    width: 100px;
+    height: 100px;
+  }
+  .table-genre {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 403px) {
+  .image-genre {
+    width: 200px;
+    height: 200px;
+  }
+  .account-img {
+    width: 80%;
+    height: auto;
+  }
+  .table {
+    width: 75% !important;
+  }
+}
+
+@media only screen and (max-width: 380px) {
+  .text-secondary {
+    font-size: 1.2rem;
+  }  
+  .account-heading {
+    font-size: 1.2rem;   
+  }
+}
+
+@media only screen and (max-width: 343px) {
+  .table-author {
+    display: none;
+  }  
+  .skull {
+    width: 97%;
+    height: auto;
+  }
+}
+
+@media only screen and (max-width: 329px) {
+  .image-genre {
+    width: 120px;
+    height: 120px;
+  }
+  .list-group-item > strong {
+    font-size: 1rem;
+  }
+  .titulo {
+    font-size: 1.8rem;
+  }
+  .table {
+    width: 80% !important;
+  }
+  .form-group > h2 {
+    font-size: 1.4rem;    
+  }
 }
