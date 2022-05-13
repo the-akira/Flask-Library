@@ -4,7 +4,7 @@ from projeto import db, bcrypt
 from projeto.models import User, Book
 from projeto.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
 from projeto.utils.utils import save_picture
-from collections import Counter, OrderedDict
+from collections import Counter
 
 users = Blueprint('users', __name__)
 
