@@ -67,6 +67,18 @@ hr {
   opacity: 0.85;
 }
 
+.btn-success:hover {
+  cursor: pointer;
+}
+
+.btn-info {
+  margin: 0.25rem;
+}
+
+.btn-info:hover {
+  cursor: pointer;
+}
+
 .page-current {
   background-color:#222222 !important;
 }
@@ -112,6 +124,7 @@ form {
   opacity: 0.8;
   box-shadow: 5px 6px 6px #222222;
   border-radius: 10px;
+  background-image: url(/static/img/dark.png);
 }
 
 input {
@@ -242,8 +255,25 @@ tr:hover {
   background-color: black;
 }
 
-option:hover { 
-    background: #000 !important;
+.review {
+  padding: 20px;
+  border: 1px solid #908d94;
+  opacity: 0.8;
+  box-shadow: 5px 6px 6px #222222;
+  border-radius: 10px;
+  background-image: url(/static/img/dark.png);
+}
+
+.delete-review {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  opacity: 1;
+}
+
+.delete-review > input {
+  width: 70px;
+  margin-bottom: 10px;
 }
 
 @media only screen and (max-width: 768px) {

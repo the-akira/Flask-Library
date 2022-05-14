@@ -19,9 +19,16 @@
         <div>
             <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('books.update_book', book_id=book.id) }}">Update</a>
             <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
+            <a class="btn btn-success btn-sm mt-1 mb-1" href="{{ url_for('books.analysis', book_id=book.id) }}">Analyze</a>
+            <a class="btn btn-info btn-sm mt-1 mb-1" target="_blank" href="https://google.com/search?q={{ book.title }}">Information</a>
+        </div>
+    {% else %}
+        <div>
+            <a class="btn btn-success btn-sm mt-1 mb-1" href="{{ url_for('books.analysis', book_id=book.id) }}">Analyze</a>
+            <a class="btn btn-info btn-sm mt-1 mb-1" target="_blank" href="https://google.com/search?q={{ book.title }}">Information</a>
         </div>
     {% endif %}	
-    <div class="container text-center">
+    <div class="container text-center mb-0 pb-0">
         <h2 class="movie-title">Author: <strong><a href="{{ url_for('books.author', author=book.author) }}">{{ book.author }}</a></strong></h2><br>
         <h4>Genre: <strong><a href="{{ url_for('books.genre', genre=book.genre) }}">{{ book.genre }}</a></strong></h4><br>
         <h5><strong>Posted in:</strong> {{ book.date_posted.strftime('%Y-%m-%d') }}</h5><br>
@@ -30,6 +37,23 @@
         <p class="mb-2 mt-3">Post by: <a href="{{ url_for('users.user_book', username=book.user.username) }}"><strong>{{ book.user.username }}</strong></a></p><br>
         <hr>
     </div>
+    {% if analysis %}
+        <h1 class="text-center titulo mb-3">Reviews</h1>
+    {% endif %} 
+    {% for analyse in analysis %}
+    <div class="review mb-3">
+        {% if book.user == current_user %}
+            <div>
+                <form class="delete-review" action="{{ url_for('books.delete_analysis', analysis_id=analyse.id, book_id=book.id) }}" method="POST">
+                    <input type="submit" class="btn btn-danger" value="Delete">
+                </form>
+            </div>
+        {% endif %} 
+        <h3><strong>User:</strong> {{ analyse.user.username }}</h3>
+        <h4><strong>Rating:</strong> {{ analyse.rating }}</h4>
+        <p class="mb-0"><strong>Review:</strong> {{ analyse.review }}</p>
+    </div> 
+    {% endfor %} 
     <!-- Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

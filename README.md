@@ -6,12 +6,14 @@ A simple library prototype using Python-Flask.
 
 ## Features
 
-- Create Book
-- Update Book
-- Delete Book
-- Search Books
-- User Registration / Login
-- Account Info / Update
+- Query Books
+- Create Books
+- Update Books
+- Delete Books
+- Analyze Books
+- Search by Genre & Author
+- User Registration & Login
+- Account Info & Update
 
 ## Installation
 

@@ -23,3 +23,15 @@ class BookForm(FlaskForm):
     summary = TextAreaField('Summary', validators=[DataRequired()])
     image_book = FileField('Picture', validators=[FileAllowed(['jpg','png'])])
     submit = SubmitField('Submit')
+
+CHOICES = [
+    ('Extraordinary', 'Extraordinary'),
+    ('Excelent', 'Excelent'),
+    ('Great', 'Great',),
+    ('Good', 'Good')
+]
+
+class AnalysisForm(FlaskForm):
+    rating = SelectField('Rating', choices=CHOICES, validators=[Required()])
+    review = TextAreaField('Review', validators=[DataRequired()])
+    submit = SubmitField('Submit')

@@ -15,11 +15,13 @@
     <h1 class="text-center titulo">Hall of Books</h1>
     <hr>
     <form method="GET" class="form-group" action="{{ url_for('main.search') }}">
+        <img class="mb-1" src="{{ url_for('static', filename='img/eye.png') }}">
         <h2>Search for Books</h2>
         <p>Search by: (<strong>Title</strong>, <strong>Author</strong>, <strong>Genre</strong> or <strong>Summary</strong>)</p>
         <input type="text" name="q" class="form-control" >
         <input type="submit" class="btn btn-primary btn-sm" value="Search" >
     </form>
+    <img class="mb-2" src="{{ url_for('static', filename='img/book.png') }}">
     <h1 class="text-center titulo mb-3">Books by Genre</h1>
     <div class="genres">      
         <a href="{{ url_for('books.genre', genre='Secret Societies') }}"><img class="image-genre" title="Secret Societies" src="{{ url_for('static', filename='genre/SecretSocieties.png') }}"></a>

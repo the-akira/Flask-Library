@@ -15,6 +15,7 @@
     <h1 class="text-center titulo">Books of <strong>{{ author }}</strong></h1>
     <hr>
     <form method="GET" class="form-group" action="{{ url_for('main.search') }}">
+        <img class="mb-1" src="{{ url_for('static', filename='img/eye.png') }}">
         <h2>Search for Books</h2>
         <p>Search by: (<strong>Title</strong>, <strong>Author</strong>, <strong>Genre</strong> or <strong>Summary</strong>)</p>
         <input type="text" name="q" class="form-control" >

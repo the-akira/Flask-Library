@@ -2,8 +2,8 @@ from flask import Blueprint
 from flask import render_template, url_for, flash, redirect, request, abort, Blueprint, session
 from flask_login import current_user, login_required
 from projeto import db
-from projeto.models import Book
-from projeto.books.forms import BookForm
+from projeto.models import Book, Analysis
+from projeto.books.forms import BookForm, AnalysisForm
 from projeto.utils.utils import save_picture
 
 books = Blueprint('books', __name__)
@@ -49,7 +49,8 @@ def new_book():
 @books.route("/book/<int:book_id>")
 def book(book_id):
     book = Book.query.get_or_404(book_id)
-    return render_template('book.html', book=book)
+    analysis = Book.query.get(book_id).analysis
+    return render_template('book.html', book=book, analysis=analysis)
 
 @books.route("/author/<string:author>")
 def author(author):
@@ -62,6 +63,34 @@ def genre(genre):
     page = request.args.get('page', 1, type=int)
     books = Book.query.filter(Book.genre.contains(genre)).paginate(page=page)
     return render_template('genre.html', books=books, genre=genre)
+
+@books.route("/analysis/<int:book_id>", methods=["GET", "POST"])
+def analysis(book_id):
+    form = AnalysisForm()
+    if form.validate_on_submit():
+        analysis = Analysis(
+            rating=form.rating.data, 
+            review=form.review.data,
+            book_id=book_id,
+            user=current_user
+        )
+        db.session.add(analysis)
+        db.session.commit()       
+        flash('Your review has been added!', 'success')
+        return redirect(url_for('books.book', book_id=book_id))
+    return render_template('analysis.html', form=form, book_id=book_id)
+
+@books.route("/analysis/<int:analysis_id>/<int:book_id>/delete", methods=["POST"])
+@login_required
+def delete_analysis(analysis_id, book_id):
+    analysis = Analysis.query.get_or_404(analysis_id)
+    book = Book.query.get_or_404(book_id)
+    if book.user != current_user:
+        abort(403)
+    db.session.delete(analysis)
+    db.session.commit()
+    flash('Your review has been deleted', 'success')
+    return redirect(url_for('books.book', book_id=book.id))
 
 @books.route("/book/<int:book_id>/delete", methods=["POST"])
 @login_required

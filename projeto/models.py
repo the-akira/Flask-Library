@@ -24,6 +24,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     image_file = db.Column(db.String(20), default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
+    analysis = db.relationship('Analysis', backref='user', lazy=True)
     Book = db.relationship('Book', backref='user', lazy=True)
 
     def __repr__(self):
@@ -38,6 +39,14 @@ class Book(db.Model):
     summary = db.Column(db.Text, nullable=False)	
     image_book = db.Column(db.String(20), nullable=True, default='book_default.jpg')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    analysis = db.relationship('Analysis', backref='book', lazy=True)
 
     def __repr__(self):
         return f"Book('{self.title}', '{self.date_posted}')"
+
+class Analysis(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    rating = db.Column(db.String(100), nullable=False)
+    review = db.Column(db.Text, nullable=False)
+    book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)

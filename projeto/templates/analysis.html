@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <br>
+    <h1 class="text-center titulo">Book Analysis</h1>
+    <br>
+    <div class="content-section">
+        <div class="media">	    
+            <div class="media-body text-center">
+                <h2 class="account-heading"><i class="fas fa-user"></i> {{ current_user.username }}</h2>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="content-section">
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Book Review</legend>
+                <div class="form-group">
+                    <div class="custom-file">
+                        {{ form.rating(class="custom-file-input") }}
+                        {{ form.rating.label(class="custom-file-label") }}
+                    </div>
+                    {% if form.rating.errors %}
+                        {% for error in form.rating.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %} 
+                </div>
+                <div class="form-group mb-0">
+                    {{ form.review.label(class="form-control-label") }}
+
+                    <!-- Seção que faz a validação dos formulários -->
+                    {% if form.review.errors %}
+                        {{ form.review(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.review.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.review(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group mt-3">
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
+                <a href="{{ url_for('books.book', book_id=book_id) }}" class="btn btn-warning mt-0">Cancel</a>
+            </fieldset>
+        </form>
+    </div>
+{% endblock content %}
+
+{% block script %}
+<script type="text/javascript">
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+{% endblock script %}
