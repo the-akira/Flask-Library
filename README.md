@@ -8,10 +8,10 @@ A simple library prototype using Python-Flask.
 
 - Query Books
 - Create Books
-- Update Books
 - Delete Books
+- Update Books
 - Analyze Books
-- Search by Genre & Author
+- Search Mechanism
 - User Registration & Login
 - Account Info & Update
 

@@ -50,3 +50,6 @@ class Analysis(db.Model):
     review = db.Column(db.Text, nullable=False)
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+
+    def __repr__(self):
+        return f"Analysis('{self.user_id}', '{self.rating}')"
