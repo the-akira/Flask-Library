@@ -86,10 +86,10 @@ Inserting a new user in the database:
 
 ```python
 user = User(
-	username='talantyr', 
-	email='talantyr@gmail.com', 
-	image_file='default.jpg', 
-	password='22447755'
+    username='talantyr', 
+    email='talantyr@gmail.com', 
+    image_file='default.jpg', 
+    password='22447755'
 )
 db.session.add(user)
 db.session.commit()
@@ -126,11 +126,11 @@ Add a new book to the database with the current user:
 
 ```python
 book = Book(
-	title='Quincas Borba', 
-	author='Machado de Assis', 
-	genre='História', 
-	summary='Clássico Brasileiro', 
-	user=user
+    title='Quincas Borba', 
+    author='Machado de Assis', 
+    genre='História', 
+    summary='Clássico Brasileiro', 
+    user=user
 )
 db.session.add(book)
 db.session.commit()
@@ -140,10 +140,10 @@ Create a review for the book:
 
 ```python
 review = Analysis(
-	rating='Muito bom!', 
-	review='Um livro altamente incrível', 
-	book_id=book.id, 
-	user=user
+    rating='Muito bom!', 
+    review='Um livro altamente incrível', 
+    book_id=book.id, 
+    user=user
 )
 db.session.add(review)
 db.session.commit()
