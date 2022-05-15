@@ -42,13 +42,15 @@
     {% endif %} 
     {% for analyse in analysis %}
     <div class="review mb-3">
-        {% if book.user == current_user %}
+        {% if analyse.user == current_user %}
             <div>
+                <a class="btn btn-secondary update-review" href="{{ url_for('books.update_analysis', analysis_id=analyse.id, book_id=book.id) }}">Update</a>
                 <form class="delete-review" action="{{ url_for('books.delete_analysis', analysis_id=analyse.id, book_id=book.id) }}" method="POST">
                     <input type="submit" class="btn btn-danger" value="Delete">
                 </form>
             </div>
         {% endif %} 
+        <img class="avatar-review" src="{{ url_for('static', filename='profile/' + analyse.user.image_file) }}">
         <h3><strong>User:</strong> {{ analyse.user.username }}</h3>
         <h4><strong>Rating:</strong> {{ analyse.rating }}</h4>
         <p class="mb-0"><strong>Review:</strong> {{ analyse.review }}</p>

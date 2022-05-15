@@ -15,19 +15,21 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th><h2 class="table-icon"><i class="fas fa-book"></i></h2></th>
-                            <th class="table-author"><h2 class="table-icon"><i class="fas fa-pencil-alt"></i></h2></th>
-                            <th class="table-genre"><h2 class="table-icon"><i class="fas fa-hamsa"></i></h2></th>
-                            <th class="table-date"><h2 class="table-icon"><i class="far fa-calendar-alt"></i></h2></th>
+                            <th><h2 class="table-icon"><i title="Title" class="fas fa-book"></i></h2></th>
+                            <th class="table-author"><h2 class="table-icon"><i title="Author" class="fas fa-pencil-alt"></i></h2></th>
+                            <th class="table-genre"><h2 class="table-icon"><i title="Genre" class="fas fa-hamsa"></i></h2></th>
+                            <th class="table-date"><h2 class="table-icon"><i title="Date Posted" class="far fa-calendar-alt"></i></h2></th>
+                            <th class="table-date"><h2 class="table-icon"><i title="Reviews" class="far fa-eye"></i></h2></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for book in current_user.Book %}
+                        {% for book in books %}
                         <tr>
-                            <td><a href="{{ url_for('books.book', book_id=book.id) }}">{{ book.title }}</a></td>
-                            <td class="table-author"><a href="{{ url_for('books.author', author=book.author) }}">{{ book.author }}</a></td>
-                            <td class="table-genre"><a href="{{ url_for('books.genre', genre=book.genre) }}">{{ book.genre }}</a></td>
-                            <td class="table-date">{{ book.date_posted.strftime('%Y-%m-%d') }}</td>
+                            <td><a href="{{ url_for('books.book', book_id=book[0]) }}">{{ book[2] }}</a></td>
+                            <td class="table-author"><a href="{{ url_for('books.author', author=book[1]) }}">{{ book[1] }}</a></td>
+                            <td class="table-genre"><a href="{{ url_for('books.genre', genre=book[3]) }}">{{ book[3] }}</a></td>
+                            <td class="table-date">{{ book[4].strftime('%Y-%m-%d') }}</td>
+                            <td class="table-date">{{ book[5] }}</td>
                         </tr>
                         {% endfor %}	
                    </tbody>
@@ -36,8 +38,8 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th><h2 class="table-icon"><i class="fas fa-pencil-alt"></i></h2></th>
-                            <th><h2 class="table-icon"><i class="fas fa-infinity"></i></h2></th>
+                            <th><h2 class="table-icon"><i title="Author" class="fas fa-pencil-alt"></i></h2></th>
+                            <th><h2 class="table-icon"><i title="Number of Books" class="fas fa-infinity"></i></h2></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,8 +55,8 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th><h2 class="table-icon"><i class="fas fa-hamsa"></i></h2></th>
-                            <th><h2 class="table-icon"><i class="fas fa-infinity"></i></h2></th>
+                            <th><h2 class="table-icon"><i title="Genre" class="fas fa-hamsa"></i></h2></th>
+                            <th><h2 class="table-icon"><i title="Number of Books" class="fas fa-infinity"></i></h2></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,7 +65,26 @@
                             <td><a href="{{ url_for('books.genre', genre=genre) }}">{{ genre }}</a></td>
                             <td><strong>{{ number }}</strong></td>
                         </tr>
-                        {% endfor %}    
+                        {% endfor %} 
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td><strong>{{ total_books }}</strong></td>
+                        </tr>    
+                   </tbody>
+                </table>
+                <br>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th><h2 class="table-icon"><i title="Reviews" class="fas fa-eye"></i></h2></th>
+                            <th><h2 class="table-icon"><i title="User's Reviews" class="fas fa-infinity"></i></h2></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Total</strong></td>
+                            <td><strong>{{ total_analysis }}</strong></td>
+                        </tr>    
                    </tbody>
                 </table>
             </div>

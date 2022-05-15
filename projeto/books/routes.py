@@ -65,6 +65,7 @@ def genre(genre):
     return render_template('genre.html', books=books, genre=genre)
 
 @books.route("/analysis/<int:book_id>", methods=["GET", "POST"])
+@login_required
 def analysis(book_id):
     form = AnalysisForm()
     if form.validate_on_submit():
@@ -141,3 +142,22 @@ def update_book(book_id):
         update=session.update, 
         book_id=book_id
     )
+
+@books.route("/analysis/<int:analysis_id>/<int:book_id>/update", methods=["GET", "POST"])
+@login_required
+def update_analysis(analysis_id, book_id):
+    book = Book.query.get_or_404(book_id)
+    analysis = Analysis.query.get_or_404(analysis_id)
+    if analysis.user != current_user:
+        abort(403)
+    form = AnalysisForm()
+    if form.validate_on_submit():
+        analysis.rating = form.rating.data
+        analysis.review = form.review.data
+        db.session.commit()
+        flash('Analysis has been updated', 'success')
+        return redirect(url_for('books.book', book_id=book.id))
+    elif request.method == 'GET':
+        form.rating.data = analysis.rating
+        form.review.data = analysis.review
+    return render_template('analysis.html', form=form, book_id=book_id, legend='Update')

@@ -60,13 +60,19 @@ def account():
         form.username.data = current_user.username
         form.email.data = current_user.email
     image_file = url_for('static', filename='profile/' + current_user.image_file)
+    books = sorted([(book.id, book.author, book.title, book.genre, book.date_posted, len(book.analysis)) for book in current_user.Book], key=lambda book: book[2])
+    total_analysis = len(current_user.analysis)
+    total_books = len(books)
     books_author = dict(Counter(sorted([book.author for book in current_user.Book])))
-    books_genre = dict(Counter(sorted([book.genre for book in current_user.Book])))
+    books_genre = dict(Counter([book.genre for book in current_user.Book]).most_common())
     return render_template(
         'account.html', 
         title='Account', 
         image_file=image_file, 
         form=form, 
+        books=books,
+        total_books=total_books, 
+        total_analysis=total_analysis,
         books_author=books_author, 
         books_genre=books_genre
     )
