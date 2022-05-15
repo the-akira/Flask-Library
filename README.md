@@ -2,7 +2,7 @@
 
 ![img](https://raw.githubusercontent.com/the-akira/Flask-Library/master/projeto/static/img/Avatar.png)
 
-A simple library prototype using Python-Flask.
+A simple library prototype using [Python](https://www.python.org/) and [Flask](https://flask.palletsprojects.com/en/2.1.x/).
 
 ## Features
 
@@ -10,7 +10,7 @@ A simple library prototype using Python-Flask.
 - Query Books
 - Delete Books
 - Update Books
-- Analyze Books
+- Review Books
 - Search Mechanism
 - User Registration & Login
 - Account Info & Update
@@ -25,25 +25,25 @@ git clone https://github.com/the-akira/Flask-Library.git
 
 ### Inside the Main Directory
 
-Create a Virtual Environment
+Create a Virtual Environment:
 
 ```
 python -m venv myvenv
 ```
 
-Activate the Virtual Environment
+Activate the Virtual Environment:
 
 ```
 source myvenv/bin/activate
 ```
 
-Install Requirements
+Install Requirements:
 
 ```
 pip install -r requirements.txt
 ```
 
-Run the Application
+Run the Application:
 
 ```
 python run.py
@@ -95,7 +95,7 @@ db.session.add(user)
 db.session.commit()
 ```
 
-Querying for users in the database:
+Querying for all users in the database:
 
 ```python
 >>> users = User.query.all()
@@ -108,7 +108,7 @@ Search for a user with a specific ID:
 >>> User.query.get(1)
 ```
 
-Order users by email in ascending order:
+Order users by email ascending:
 
 ```python
 >>> users = User.query.order_by(User.email.asc())
