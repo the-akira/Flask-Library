@@ -85,9 +85,14 @@ Importing the database models:
 Inserting a new user in the database:
 
 ```python
->>> user = User(username='talantyr', email='talantyr@gmail.com', image_file='default.jpg', password='22447755')
->>> db.session.add(user)
->>> db.session.commit()
+user = User(
+	username='talantyr', 
+	email='talantyr@gmail.com', 
+	image_file='default.jpg', 
+	password='22447755'
+)
+db.session.add(user)
+db.session.commit()
 ```
 
 Querying for users in the database:
@@ -120,17 +125,28 @@ Search for a specific user in the database:
 Add a new book to the database with the current user:
 
 ```python
->>> book = Book(title='Quincas Borba', author='Machado de Assis', genre='História', summary='Clássico Brasileiro',user=user)
->>> db.session.add(book)
->>> db.session.commit()
+book = Book(
+	title='Quincas Borba', 
+	author='Machado de Assis', 
+	genre='História', 
+	summary='Clássico Brasileiro', 
+	user=user
+)
+db.session.add(book)
+db.session.commit()
 ```
 
 Create a review for the book:
 
 ```python
->>> review = Analysis(rating='Muito bom!', review='Um livro altamente incrível', book_id=book.id, user=user)
->>> db.session.add(review)
->>> db.session.commit()
+review = Analysis(
+	rating='Muito bom!', 
+	review='Um livro altamente incrível', 
+	book_id=book.id, 
+	user=user
+)
+db.session.add(review)
+db.session.commit()
 ```
 
 Have a good read!
