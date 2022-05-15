@@ -3,17 +3,6 @@ from flask import current_app
 from datetime import datetime
 from flask_login import UserMixin
 
-# >>> from projeto import create_app
-# >>> app = create_app()
-# >>> app.app_context().push()
-# >>> from projeto.models import User
-# >>> from projeto import db
-# >>> db.create_all()
-# >>> user_1 = User(username='akira', email='akira@gmail.com', password='akira123')
-# >>> db.session.add(user_1)
-# >>> db.session.commit()
-# >>> User.query.all()
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
