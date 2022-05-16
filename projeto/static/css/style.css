@@ -296,6 +296,20 @@ tr:hover {
   margin-top: 3px;
 }
 
+#tableAllBooks,
+#tableAllAuthors,
+#tableAllGenres,
+#tableTotalReviews {
+  display: none;
+}
+
+#buttonAllBooks,
+#buttonAllAuthors,
+#buttonAllGenres,
+#buttonTotalReviews {
+  width: 150px;
+}
+
 @media only screen and (max-width: 768px) {
   .skull {
     width: 80%;

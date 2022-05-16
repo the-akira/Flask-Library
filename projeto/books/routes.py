@@ -68,6 +68,7 @@ def genre(genre):
 @login_required
 def analysis(book_id):
     form = AnalysisForm()
+    book = Book.query.get_or_404(book_id)
     if form.validate_on_submit():
         analysis = Analysis(
             rating=form.rating.data, 
@@ -86,7 +87,7 @@ def analysis(book_id):
 def delete_analysis(analysis_id, book_id):
     analysis = Analysis.query.get_or_404(analysis_id)
     book = Book.query.get_or_404(book_id)
-    if book.user != current_user:
+    if analysis.user != current_user:
         abort(403)
     db.session.delete(analysis)
     db.session.commit()

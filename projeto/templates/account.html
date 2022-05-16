@@ -11,8 +11,9 @@
             <div class="media-body text-center">
                 <h2 class="account-heading"><i class="fas fa-user"></i> {{ current_user.username }}</h2>
                 <h4 class="text-secondary"><i class="fas fa-envelope-square"></i> {{ current_user.email }}</h4>
-                <br>	      
-                <table class="table table-bordered">
+                <br>
+                <button id="buttonAllBooks" class="btn btn-secondary btn-sm mb-3">Show All Books</button>	      
+                <table id="tableAllBooks" class="table table-bordered">
                     <thead>
                         <tr>
                             <th><h2 class="table-icon"><i title="Title" class="fas fa-book"></i></h2></th>
@@ -35,7 +36,8 @@
                    </tbody>
                 </table>
                 <br>
-                <table class="table table-bordered">
+                <button id="buttonAllAuthors" class="btn btn-success btn-sm mb-3">Show All Authors</button>   
+                <table id="tableAllAuthors" class="table table-bordered">
                     <thead>
                         <tr>
                             <th><h2 class="table-icon"><i title="Author" class="fas fa-pencil-alt"></i></h2></th>
@@ -52,7 +54,8 @@
                    </tbody>
                 </table>
                 <br>
-                <table class="table table-bordered">
+                <button id="buttonAllGenres" class="btn btn-info btn-sm mb-3 mt-0">Show All Genres</button>   
+                <table id="tableAllGenres" class="table table-bordered">
                     <thead>
                         <tr>
                             <th><h2 class="table-icon"><i title="Genre" class="fas fa-hamsa"></i></h2></th>
@@ -73,7 +76,8 @@
                    </tbody>
                 </table>
                 <br>
-                <table class="table table-bordered">
+                <button id="buttonTotalReviews" class="btn btn-dark btn-sm mb-3">Show Total Reviews</button>   
+                <table id="tableTotalReviews" class="table table-bordered">
                     <thead>
                         <tr>
                             <th><h2 class="table-icon"><i title="Reviews" class="fas fa-eye"></i></h2></th>
@@ -151,6 +155,21 @@
     $(".custom-file-input").on("change", function() {
         var fileName = $(this).val().split("\\").pop();
         $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+
+    $(document).ready(function(){
+      $("#buttonAllBooks").click(function(){
+        $("#tableAllBooks").toggle();
+      });
+      $("#buttonAllAuthors").click(function(){
+        $("#tableAllAuthors").toggle();
+      });
+      $("#buttonAllGenres").click(function(){
+        $("#tableAllGenres").toggle();
+      });
+      $("#buttonTotalReviews").click(function(){
+        $("#tableTotalReviews").toggle();
+      });
     });
 </script>
 {% endblock script %}

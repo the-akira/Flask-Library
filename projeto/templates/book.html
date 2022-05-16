@@ -51,7 +51,7 @@
             </div>
         {% endif %} 
         <img class="avatar-review" src="{{ url_for('static', filename='profile/' + analyse.user.image_file) }}">
-        <h3><strong>User:</strong> {{ analyse.user.username }}</h3>
+        <h3><strong></strong><a href="{{ url_for('users.user_book', username=analyse.user.username) }}">{{ analyse.user.username }}</a></h3>
         <h4><strong>Rating:</strong> {{ analyse.rating }}</h4>
         <p class="mb-0"><strong>Review:</strong> {{ analyse.review }}</p>
     </div> 
