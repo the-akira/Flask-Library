@@ -67,6 +67,15 @@ hr {
   opacity: 0.85;
 }
 
+.btn-primary:focus {
+ box-shadow: 0 0 0 0.1rem rgb(255 255 255 / 50%) !important;
+}
+
+.form-control:focus {
+  border-color: #100109;
+  box-shadow: 0 0 0 0.1rem rgb(0 0 0 / 50%) !important;
+}
+
 .btn-success:hover {
   cursor: pointer;
 }
