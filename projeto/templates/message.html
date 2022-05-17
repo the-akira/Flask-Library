@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <br>
+    <h1 class="text-center titulo">Send Message to {{ recipient }}</h1>
+    <br>
+    <div class="content-section">
+        <div class="media">	    
+            <div class="media-body text-center">
+                <h2 class="account-heading"><i class="fas fa-user"></i> {{ current_user.username }}</h2>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="content-section">
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Message to {{ recipient }}</legend>
+                <div class="form-group mb-0">
+                    <!-- Seção que faz a validação dos formulários -->
+                    {% if form.message.errors %}
+                        {{ form.message(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.message.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.message(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group mt-3">
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
+                {% if page == 'user' %}
+                    <a href="{{ url_for('users.user_book', username=recipient) }}" class="btn btn-warning mt-0">Cancel</a>
+                {% elif page == 'messages' %}
+                    <a href="{{ url_for('users.messages') }}" class="btn btn-warning mt-0">Cancel</a>
+                {% endif %}
+            </fieldset>
+        </form>
+        <br>
+    </div>
+{% endblock content %}

@@ -278,11 +278,36 @@ tr:hover {
   float: right;
 }
 
+.delete-message {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  opacity: 1;  
+}
+
+.delete-message > input {
+  width: 80px;
+  margin-bottom: 10px;
+  margin-left: 8px; 
+}
+
 .update-review {
   width: 80px;
   margin-bottom: 10px;
   margin-right: 8px;
   float: left;
+}
+
+.message-btn, .delete-btn {
+  width: 95px !important;
+}
+
+.btn-light:hover {
+  opacity: 0.9;
+}
+
+.btn-light:focus {
+  box-shadow: 0 0 0 0.2rem rgb(94 18 224 / 50%) !important;
 }
 
 .avatar-review {
@@ -360,6 +385,10 @@ tr:hover {
   .account-heading {
     font-size: 1.2rem;   
   }
+  .delete-review > input, .update-review {
+    float: none;
+    margin: 0px 0px 10px 0px;
+  }
 }
 
 @media only screen and (max-width: 343px) {
@@ -388,9 +417,5 @@ tr:hover {
   }
   .form-group > h2 {
     font-size: 1.4rem;    
-  }
-  .delete-review > input, .update-review {
-    float: none;
-    margin: 0px 0px 10px 0px;
   }
 }

@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container text-center mb-0 mt-0 pt-2">
+    <h1 class="mb-4 titulo">Messages of <strong>{{ current_user.username }} ({{ total_messages }})</strong></h1>
+    {% if messages %}
+        <button type="button" class="btn btn-danger btn-sm mb-3" data-toggle="modal" data-target="#deleteModal">Delete All</button>
+    {% endif %} 
+    {% for message in messages %}
+    <div class="review mb-3">
+        {% if message.author.username != current_user.username %}
+            <div>
+                <a class="btn btn-success update-review message-btn" href="{{ url_for('users.send_message', recipient=message.author.username, page='messages') }}">Message</a>
+                <form class="delete-review" action="{{ url_for('users.delete_message', message_id=message.id) }}" method="POST">
+                    <input type="submit" class="btn btn-danger delete-btn" value="Delete">
+                </form>
+            </div>
+        {% endif %} 
+        <img class="avatar-review" src="{{ url_for('static', filename='profile/' + message.author.image_file) }}">
+        <h3><strong></strong><a href="{{ url_for('users.user_book', username=message.author.username) }}">{{ message.author.username }}</a></h3>
+        <p class="mb-0"><strong>Message:</strong> {{ message.body }}</p>
+        <p class="mb-0 mt-1"><strong>Sent in:</strong> {{ message.timestamp.strftime('%Y-%m-%d') }}</p>
+    </div> 
+    {% endfor %}
+
+    <a class="btn btn-primary mt-3 {% if not prev_url %} disabled{% endif %}" href="{{ prev_url or '#' }}">&larr;</a>
+    <a class="btn btn-primary mt-3 {% if not next_url %} disabled{% endif %}" href="{{ next_url or '#' }}">&rarr;</a>
+
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Would you like to delete all messages?</strong>?</h5>
+            <button type="button" class="close close-modal" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <form style="background-image: none;" class="delete-form" action="{{ url_for('users.delete_all_messages') }}" method="POST">
+                <input type="submit" class="btn btn-danger delete-btn" style="width: 100px; float: none; color: white;" value="Delete All">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock content %}

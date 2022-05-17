@@ -19,12 +19,12 @@
         <div>
             <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('books.update_book', book_id=book.id) }}">Update</a>
             <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
-            <a class="btn btn-success btn-sm mt-1 mb-1" href="{{ url_for('books.analysis', book_id=book.id) }}">Analyze</a>
+            <a class="btn btn-light btn-sm mt-1 mb-1" style="background-color: #5e12e0; border:none;" href="{{ url_for('books.analysis', book_id=book.id) }}">Analyze</a>
             <a class="btn btn-info btn-sm mt-1 mb-1" target="_blank" href="https://google.com/search?q={{ book.title }}">Information</a>
         </div>
     {% else %}
         <div>
-            <a class="btn btn-success btn-sm mt-1 mb-1" href="{{ url_for('books.analysis', book_id=book.id) }}">Analyze</a>
+            <a class="btn btn-light btn-sm mt-1 mb-1" style="background-color: #5e12e0; border:none;" href="{{ url_for('books.analysis', book_id=book.id) }}">Analyze</a>
             <a class="btn btn-info btn-sm mt-1 mb-1" target="_blank" href="https://google.com/search?q={{ book.title }}">Information</a>
         </div>
     {% endif %}	
@@ -51,7 +51,7 @@
             </div>
         {% endif %} 
         <img class="avatar-review" src="{{ url_for('static', filename='profile/' + analyse.user.image_file) }}">
-        <h3><strong></strong><a href="{{ url_for('users.user_book', username=analyse.user.username) }}">{{ analyse.user.username }}</a></h3>
+        <h3><a href="{{ url_for('users.user_book', username=analyse.user.username) }}">{{ analyse.user.username }}</a></h3>
         <h4><strong>Rating:</strong> {{ analyse.rating }}</h4>
         <p class="mb-0"><strong>Review:</strong> {{ analyse.review }}</p>
     </div> 
@@ -68,7 +68,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <form class="delete-form" action="{{ url_for('books.delete_book', book_id=book.id) }}" method="POST">
+                    <form class="delete-form" style="background-image: none;" action="{{ url_for('books.delete_book', book_id=book.id) }}" method="POST">
                         <input type="submit" class="btn btn-danger" value="Delete">
                     </form>
                 </div>

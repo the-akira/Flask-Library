@@ -3,14 +3,17 @@
 {% block content %}
 <div class="container text-center mb-0">
     <h1 class="mb-3 titulo">Books by <strong>{{ user.username }}</strong></h1>
+    {% if user != current_user %}
+        <a class="btn btn-success btn-sm mb-3 mt-1" href="{{ url_for('users.send_message',recipient=user.username, page='user') }}">Send Message</a>
+    {% endif %}
     <hr>
     {% for book in books.items %}
         <div>
             <div>
                 <br>
-                <h2 class="movie-title">Title: <a class="article-title" href="{{ url_for('books.book', book_id=book.id) }}">{{ book.title }}</a></h2>
+                <h2 class="movie-title">Title: <strong><a class="article-title" href="{{ url_for('books.book', book_id=book.id) }}">{{ book.title }}</a></strong></h2>
                 <br>
-                <h3>Author: <strong><a href="{{ url_for('books.author', author=book.author) }}">{{ book.author }}</strong></a></h3><br>
+                <h3>Author: <strong><a href="{{ url_for('books.author', author=book.author) }}">{{ book.author }}</a></strong></h3><br>
                 <h4>Genre: <strong><a href="{{ url_for('books.genre', genre=book.genre) }}">{{ book.genre }}</a></strong></h4><br>
                 <p class="article-content"><strong>Summary:</strong> {{ book.summary }}</p><br>
                 <img class="img-thumbnail article-img" src="{{ url_for('static', filename='book/' + book.image_book) }}"><br>

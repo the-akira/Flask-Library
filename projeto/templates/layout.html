@@ -24,6 +24,7 @@
                     {% if current_user.is_authenticated %}
                         <a class="list-group-item" href="{{ url_for('books.new_book') }}"><strong>New Book</strong></a>
                         <a class="list-group-item" href="{{ url_for('users.account') }}"><strong>Account</strong></a>
+                        <a class="list-group-item" href="{{ url_for('users.messages') }}"><strong>Messages</strong></a>
                         <a class="list-group-item" href="{{ url_for('users.logout') }}"><strong>Logout</strong></a>
                     {% else %}
                         <a class="list-group-item" href="{{ url_for('users.register') }}"><strong>Register</strong></a>

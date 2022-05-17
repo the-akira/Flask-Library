@@ -11,6 +11,7 @@ A simple library prototype using [Python](https://www.python.org/) and [Flask](h
 - Delete Books
 - Update Books
 - Review Books
+- Message System
 - Search Mechanism
 - User Registration & Login
 - Account Info & Update

@@ -1,10 +1,11 @@
-from flask import render_template, url_for, flash, redirect, request, Blueprint
+from flask import render_template, url_for, flash, redirect, request, Blueprint, abort
 from flask_login import login_user, current_user, logout_user, login_required
 from projeto import db, bcrypt
-from projeto.models import User, Book
-from projeto.users.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from projeto.models import User, Book, Message
+from projeto.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, MessageForm
 from projeto.utils.utils import save_picture
 from collections import Counter
+from datetime import datetime
 
 users = Blueprint('users', __name__)
 
@@ -40,6 +41,7 @@ def login():
 
 @users.route("/logout")
 def logout():
+    flash(f'{current_user.username} logged out.', 'success')
     logout_user()
     return redirect(url_for('main.home'))
 
@@ -83,3 +85,58 @@ def user_book(username):
     user = User.query.filter_by(username=username).first_or_404()
     books = Book.query.filter_by(user=user).order_by(Book.date_posted.desc()).paginate(page=page, per_page=5)
     return render_template('user_books.html', books=books, user=user)
+
+@users.route('/send_message/<string:recipient>/<string:page>', methods=['GET', 'POST'])
+@login_required
+def send_message(recipient, page):
+    user = User.query.filter_by(username=recipient).first_or_404()
+    form = MessageForm()
+    if form.validate_on_submit():
+        msg = Message(author=current_user, recipient=user,
+                      body=form.message.data)
+        db.session.add(msg)
+        db.session.commit()
+        flash(f'Your message has been sent to {user.username}', 'success')
+        if page == 'messages':
+            return redirect(url_for('users.messages'))  
+        elif page == 'user':
+            return redirect(url_for('users.user_book', username=recipient))
+    return render_template('message.html', form=form, recipient=recipient, page=page)
+
+@users.route('/messages')
+@login_required
+def messages():
+    current_user.last_message_read_time = datetime.utcnow()
+    db.session.commit()
+    page = request.args.get('page', 1, type=int)
+    messages = current_user.messages_received.order_by(
+        Message.timestamp.desc()).paginate(page, 5, False)
+    next_url = url_for('users.messages', page=messages.next_num) \
+        if messages.has_next else None
+    prev_url = url_for('users.messages', page=messages.prev_num) \
+        if messages.has_prev else None
+    return render_template('messages.html', messages=messages.items,
+                           next_url=next_url, prev_url=prev_url, total_messages=messages.total)
+
+@users.route("/message/<int:message_id>/delete", methods=["POST"])
+@login_required
+def delete_message(message_id):
+    message = Message.query.get_or_404(message_id)
+    if message.author == current_user:
+        abort(403)
+    db.session.delete(message)
+    db.session.commit()
+    flash('Message deleted', 'success')
+    return redirect(url_for('users.messages'))
+
+@users.route("/message/delete_all", methods=["POST"])
+@login_required
+def delete_all_messages():
+    messages = Message.query.filter_by(recipient_id=current_user.id).all()
+    for message in messages:
+        if message.author == current_user:
+            abort(403)      
+        db.session.delete(message)
+    db.session.commit()
+    flash('All Messages deleted', 'success')
+    return redirect(url_for('users.messages'))
