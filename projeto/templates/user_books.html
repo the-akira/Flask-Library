@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container text-center mb-0">
     <h1 class="mb-3 titulo">Books by <strong>{{ user.username }}</strong></h1>
-    {% if user != current_user %}
+    {% if user != current_user and current_user.is_authenticated %}
         <a class="btn btn-success btn-sm mb-3 mt-1" href="{{ url_for('users.send_message',recipient=user.username, page='user') }}">Send Message</a>
     {% endif %}
     <hr>
