@@ -55,13 +55,13 @@ def book(book_id):
 @books.route("/author/<string:author>")
 def author(author):
     page = request.args.get('page', 1, type=int)
-    books = Book.query.filter(Book.author.contains(author.strip())).paginate(page=page)
+    books = Book.query.filter(Book.author.contains(author.strip())).paginate(page=page, per_page=5)
     return render_template('author.html', books=books, author=author)
 
 @books.route("/genre/<string:genre>")
 def genre(genre):
     page = request.args.get('page', 1, type=int)
-    books = Book.query.filter(Book.genre.contains(genre)).paginate(page=page)
+    books = Book.query.filter(Book.genre.contains(genre)).paginate(page=page, per_page=5)
     return render_template('genre.html', books=books, genre=genre)
 
 @books.route("/analysis/<int:book_id>", methods=["GET", "POST"])
