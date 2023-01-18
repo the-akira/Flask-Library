@@ -114,7 +114,7 @@ def update_book(book_id):
     form = BookForm()
     if form.validate_on_submit():
         if form.image_book.data:
-            picture_file = save_book_picture(form.image_book.data, 'static/book', 300, 480)
+            picture_file = save_picture(form.image_book.data, 'static/book', 300, 480)
             book.title = form.title.data.strip()
             book.author = form.author.data.strip()
             book.genre = form.genre.data
