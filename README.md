@@ -7,14 +7,18 @@ A simple library prototype using [Python](https://www.python.org/) and [Flask](h
 ## Features
 
 - Create Books
-- Query Books
+- Search Books
 - Delete Books
 - Update Books
 - Review Books
 - Message System
-- Search Mechanism
 - User Registration & Login
 - Account Info & Update
+
+## TODO
+
+- Create a table for Authors.
+- Create the interface for Authors.
 
 ## Installation
 
