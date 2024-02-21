@@ -14,7 +14,7 @@ importlib-metadata==4.11.3
 importlib-resources==5.7.1
 itsdangerous==1.1.0
 Jinja2==2.11.3
-Mako==1.2.0
+Mako==1.2.2
 MarkupSafe==1.1.1
 Pillow==9.0.1
 pycparser==2.19
