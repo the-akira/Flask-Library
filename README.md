@@ -1,6 +1,6 @@
 # Flask Library
 
-![img](https://raw.githubusercontent.com/the-akira/Flask-Library/master/projeto/static/img/Avatar.png)
+![img](/projeto/static/img/Avatar.png)
 
 A simple library prototype using [Python](https://www.python.org/) and [Flask](https://flask.palletsprojects.com/en/2.1.x/).
 
